@@ -74,12 +74,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<version>2.4.4</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 			<version>2.4.6</version>
@@ -112,8 +106,28 @@
 								ApiUtil.java
 							</supportingFilesToGenerate>
 							<configOptions>
-								<delegatePattern>true</delegatePattern>
+								<serializableModel>true</serializableModel>
+								<dateLibrary>java8</dateLibrary>
 							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>test</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${basedir}/target/generated-sources</source>
+							</sources>
 						</configuration>
 					</execution>
 				</executions>
