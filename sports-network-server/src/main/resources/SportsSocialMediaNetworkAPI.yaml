@@ -1,0 +1,1383 @@
+---
+openapi: 3.0.2
+info:
+  title: SportsSocialMediaNetwork API
+  version: 1.0.0
+servers:
+- url: http://localhost:8080
+  description: |
+    Localhost
+paths:
+  /events/{eventId}:
+    summary: Path used to manage a single Event.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `Event`.  This path contains `GET`, `PUT`, and `DELETE` operations used\
+      \ to perform the get, update, and delete tasks, respectively."
+    get:
+      tags:
+      - Event
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+          description: Successful response - returns a single `Event`.
+        "404":
+          description: Event not found
+      operationId: getEvent
+      summary: Get a Event
+      description: Gets the details of a single instance of a `Event`.
+    put:
+      requestBody:
+        description: Updated `Event` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+        required: true
+      tags:
+      - Event
+      responses:
+        "202":
+          description: Successful response.
+        "404":
+          description: Event not found
+      operationId: updateEvent
+      summary: Update a Event
+      description: Updates an existing `Event`.
+    delete:
+      tags:
+      - Event
+      responses:
+        "204":
+          description: Successful response.
+        "404":
+          description: Event not found
+      operationId: deleteEvent
+      summary: Delete a Event
+      description: Deletes an existing `Event`.
+    parameters:
+    - name: eventId
+      description: A unique identifier for a `Event`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /events:
+    summary: Path used to manage the list of events.
+    description: "The REST endpoint/path used to list and create zero or more `Event`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      tags:
+      - Event
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+          description: Successful response - returns an array of `Event` entities.
+        "404":
+          description: Event not found
+      operationId: getEvents
+      summary: List All Events
+      description: Gets a list of all `Event` entities.
+    post:
+      requestBody:
+        description: A new `Event` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+        required: true
+      tags:
+      - Event
+      responses:
+        "201":
+          description: Successful response.
+        "404":
+          description: Event not found.
+      operationId: createEvent
+      summary: Create a Event
+      description: Creates a new instance of a `Event`.
+  /users:
+    summary: Path used to manage the list of users.
+    description: "The REST endpoint/path used to list and create zero or more `User`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      tags:
+      - User
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: Successful response - returns an array of `User` entities.
+        "404":
+          description: User not found.
+      operationId: getUsers
+      summary: List All Users
+      description: Gets a list of all `User` entities.
+    post:
+      requestBody:
+        description: A new `User` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      tags:
+      - User
+      responses:
+        "201":
+          description: Successful response.
+        "404":
+          description: User not found.
+      operationId: createUser
+      summary: Create a User
+      description: Creates a new instance of a `User`.
+  /users/{userId}:
+    summary: Path used to manage a single User.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `User`.  This path contains `GET`, `PUT`, and `DELETE` operations used\
+      \ to perform the get, update, and delete tasks, respectively."
+    get:
+      tags:
+      - User
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Successful response - returns a single `User`.
+        "404":
+          description: User not found.
+      operationId: getUser
+      summary: Get a User
+      description: Gets the details of a single instance of a `User`.
+    put:
+      requestBody:
+        description: Updated `User` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      tags:
+      - User
+      responses:
+        "202":
+          description: Successful response.
+        "404":
+          description: User not found.
+      operationId: updateUser
+      summary: Update a User
+      description: Updates an existing `User`.
+    delete:
+      tags:
+      - User
+      responses:
+        "204":
+          description: Successful response.
+        "404":
+          description: User not found.
+      operationId: deleteUser
+      summary: Delete a User
+      description: Deletes an existing `User`.
+    parameters:
+    - name: userId
+      description: A unique identifier for a `User`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /groups:
+    summary: Path used to manage the list of groups.
+    description: "The REST endpoint/path used to list and create zero or more `Group`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      tags:
+      - Group
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group'
+          description: Successful response - returns an array of `Group` entities.
+        "404":
+          description: Group not found.
+      operationId: getGroups
+      summary: List All Groups
+      description: Gets a list of all `Group` entities.
+    post:
+      requestBody:
+        description: A new `Group` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+        required: true
+      tags:
+      - Group
+      responses:
+        "201":
+          description: Successful response.
+        "404":
+          description: Group not found.
+      operationId: createGroup
+      summary: Create a Group
+      description: Creates a new instance of a `Group`.
+  /groups/{groupId}:
+    summary: Path used to manage a single Group.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `Group`.  This path contains `GET`, `PUT`, and `DELETE` operations used\
+      \ to perform the get, update, and delete tasks, respectively."
+    get:
+      tags:
+      - Group
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+          description: Successful response - returns a single `Group`.
+        "404":
+          description: Group not found.
+      operationId: getGroup
+      summary: Get a Group
+      description: Gets the details of a single instance of a `Group`.
+    put:
+      requestBody:
+        description: Updated `Group` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+        required: true
+      tags:
+      - Group
+      responses:
+        "202":
+          description: Successful response.
+        "404":
+          description: Group not found.
+      operationId: updateGroup
+      summary: Update a Group
+      description: Updates an existing `Group`.
+    delete:
+      tags:
+      - Group
+      responses:
+        "204":
+          description: Successful response.
+        "404":
+          description: Group not found.
+      operationId: deleteGroup
+      summary: Delete a Group
+      description: Deletes an existing `Group`.
+    parameters:
+    - name: groupId
+      description: A unique identifier for a `Group`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /groupmembers/{groupmemberId}:
+    summary: Path used to manage a single GroupMember.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `GroupMember`.  This path contains `GET`, `PUT`, and `DELETE` operations\
+      \ used to perform the get, update, and delete tasks, respectively."
+    get:
+      tags:
+      - GroupMember
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMember'
+          description: Successful response - returns a single `GroupMember`.
+        "404":
+          description: |
+            Group member not found.
+      operationId: getGroupMember
+      summary: Get a GroupMember
+      description: Gets the details of a single instance of a `GroupMember`.
+    put:
+      requestBody:
+        description: Updated `GroupMember` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMember'
+        required: true
+      tags:
+      - GroupMember
+      responses:
+        "202":
+          description: Successful response.
+        "404":
+          description: |
+            Group member not found.
+      operationId: updateGroupMember
+      summary: Update a GroupMember
+      description: Updates an existing `GroupMember`.
+    delete:
+      tags:
+      - GroupMember
+      responses:
+        "204":
+          description: Successful response.
+        "404":
+          description: |
+            Group member not found.
+      operationId: deleteGroupMember
+      summary: Delete a GroupMember
+      description: Deletes an existing `GroupMember`.
+    parameters:
+    - name: groupmemberId
+      description: A unique identifier for a `GroupMember`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /groupmembers:
+    summary: Path used to manage the list of groupmembers.
+    description: "The REST endpoint/path used to list and create zero or more `GroupMember`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      tags:
+      - GroupMember
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupMember'
+          description: Successful response - returns an array of `GroupMember` entities.
+        "404":
+          description: |
+            Group member not found.
+      operationId: getGroupMembers
+      summary: List All GroupMembers
+      description: Gets a list of all `GroupMember` entities.
+    post:
+      requestBody:
+        description: A new `GroupMember` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMember'
+        required: true
+      tags:
+      - GroupMember
+      responses:
+        "201":
+          description: Successful response.
+        "404":
+          description: |
+            Group member not found.
+      operationId: createGroupMember
+      summary: Create a GroupMember
+      description: Creates a new instance of a `GroupMember`.
+  /groupmessages/{groupmessageId}:
+    summary: Path used to manage a single GroupMessage.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `GroupMessage`.  This path contains `GET`, `PUT`, and `DELETE` operations\
+      \ used to perform the get, update, and delete tasks, respectively."
+    get:
+      tags:
+      - GroupMessage
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupMessage'
+          description: Successful response - returns a single `GroupMessage`.
+        "404":
+          description: Group message not found.
+      operationId: getGroupMessage
+      summary: Get a GroupMessage
+      description: Gets the details of a single instance of a `GroupMessage`.
+    put:
+      requestBody:
+        description: Updated `GroupMessage` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMessage'
+        required: true
+      tags:
+      - GroupMessage
+      responses:
+        "202":
+          description: Successful response.
+        "404":
+          description: Group message not found.
+      operationId: updateGroupMessage
+      summary: Update a GroupMessage
+      description: Updates an existing `GroupMessage`.
+    delete:
+      tags:
+      - GroupMessage
+      responses:
+        "204":
+          description: Successful response.
+        "404":
+          description: Group message not found.
+      operationId: deleteGroupMessage
+      summary: Delete a GroupMessage
+      description: Deletes an existing `GroupMessage`.
+    parameters:
+    - name: groupmessageId
+      description: A unique identifier for a `GroupMessage`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /groupmessages:
+    summary: Path used to manage the list of groupmessages.
+    description: "The REST endpoint/path used to list and create zero or more `GroupMessage`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      tags:
+      - GroupMessage
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupMessage'
+          description: Successful response - returns an array of `GroupMessage` entities.
+        "404":
+          description: Group message not found.
+      operationId: getGroupMessages
+      summary: List All GroupMessages
+      description: Gets a list of all `GroupMessage` entities.
+    post:
+      requestBody:
+        description: A new `GroupMessage` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMessage'
+        required: true
+      tags:
+      - GroupMessage
+      responses:
+        "201":
+          description: Successful response.
+        "404":
+          description: Group message not found.
+      operationId: createGroupMessage
+      summary: Create a GroupMessage
+      description: Creates a new instance of a `GroupMessage`.
+  /groupposts:
+    summary: Path used to manage the list of groupposts.
+    description: "The REST endpoint/path used to list and create zero or more `GroupPost`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      tags:
+      - GroupPost
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupPost'
+          description: Successful response - returns an array of `GroupPost` entities.
+        "404":
+          description: Group post not found.
+      operationId: getGroupPosts
+      summary: List All GroupPosts
+      description: Gets a list of all `GroupPost` entities.
+    post:
+      requestBody:
+        description: A new `GroupPost` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupPost'
+        required: true
+      tags:
+      - GroupPost
+      responses:
+        "201":
+          description: Successful response.
+        "404":
+          description: Group post not found.
+      operationId: createGroupPost
+      summary: Create a GroupPost
+      description: Creates a new instance of a `GroupPost`.
+  /groupposts/{grouppostId}:
+    summary: Path used to manage a single GroupPost.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `GroupPost`.  This path contains `GET`, `PUT`, and `DELETE` operations\
+      \ used to perform the get, update, and delete tasks, respectively."
+    get:
+      tags:
+      - GroupPost
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupPost'
+          description: Successful response - returns a single `GroupPost`.
+        "404":
+          description: Group post not found.
+      operationId: getGroupPost
+      summary: Get a GroupPost
+      description: Gets the details of a single instance of a `GroupPost`.
+    put:
+      requestBody:
+        description: Updated `GroupPost` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupPost'
+        required: true
+      tags:
+      - GroupPost
+      responses:
+        "202":
+          description: Successful response.
+        "404":
+          description: Group post not found.
+      operationId: updateGroupPost
+      summary: Update a GroupPost
+      description: Updates an existing `GroupPost`.
+    delete:
+      tags:
+      - GroupPost
+      responses:
+        "204":
+          description: Successful response.
+        "404":
+          description: Group post not found.
+      operationId: deleteGroupPost
+      summary: Delete a GroupPost
+      description: Deletes an existing `GroupPost`.
+    parameters:
+    - name: grouppostId
+      description: A unique identifier for a `GroupPost`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /usermessages:
+    summary: Path used to manage the list of usermessages.
+    description: "The REST endpoint/path used to list and create zero or more `UserMessage`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      tags:
+      - UserMessage
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserMessage'
+          description: Successful response - returns an array of `UserMessage` entities.
+        "404":
+          description: User message not found.
+      operationId: getUserMessages
+      summary: List All UserMessages
+      description: Gets a list of all `UserMessage` entities.
+    post:
+      requestBody:
+        description: A new `UserMessage` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserMessage'
+        required: true
+      tags:
+      - UserMessage
+      responses:
+        "201":
+          description: Successful response.
+        "404":
+          description: User message not found.
+      operationId: createUserMessage
+      summary: Create a UserMessage
+      description: Creates a new instance of a `UserMessage`.
+  /usermessages/{usermessageId}:
+    summary: Path used to manage a single UserMessage.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `UserMessage`.  This path contains `GET`, `PUT`, and `DELETE` operations\
+      \ used to perform the get, update, and delete tasks, respectively."
+    get:
+      tags:
+      - UserMessage
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserMessage'
+          description: Successful response - returns a single `UserMessage`.
+        "404":
+          description: User message not found.
+      operationId: getUserMessage
+      summary: Get a UserMessage
+      description: Gets the details of a single instance of a `UserMessage`.
+    put:
+      requestBody:
+        description: Updated `UserMessage` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserMessage'
+        required: true
+      tags:
+      - UserMessage
+      responses:
+        "202":
+          description: Successful response.
+        "404":
+          description: User message not found.
+      operationId: updateUserMessage
+      summary: Update a UserMessage
+      description: Updates an existing `UserMessage`.
+    delete:
+      tags:
+      - UserMessage
+      responses:
+        "204":
+          description: Successful response.
+        "404":
+          description: User message not found.
+      operationId: deleteUserMessage
+      summary: Delete a UserMessage
+      description: Deletes an existing `UserMessage`.
+    parameters:
+    - name: usermessageId
+      description: A unique identifier for a `UserMessage`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /userfriends:
+    summary: Path used to manage the list of userfriends.
+    description: "The REST endpoint/path used to list and create zero or more `UserFriend`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      tags:
+      - UserFriend
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserFriend'
+          description: Successful response - returns an array of `UserFriend` entities.
+      operationId: getUserFriends
+      summary: List All UserFriends
+      description: Gets a list of all `UserFriend` entities.
+    post:
+      requestBody:
+        description: A new `UserFriend` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserFriend'
+        required: true
+      tags:
+      - UserFriend
+      responses:
+        "201":
+          description: Successful response.
+      operationId: createUserFriend
+      summary: Create a UserFriend
+      description: Creates a new instance of a `UserFriend`.
+  /userfriends/{userfriendId}:
+    summary: Path used to manage a single UserFriend.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `UserFriend`.  This path contains `GET`, `PUT`, and `DELETE` operations\
+      \ used to perform the get, update, and delete tasks, respectively."
+    get:
+      tags:
+      - UserFriend
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserFriend'
+          description: Successful response - returns a single `UserFriend`.
+      operationId: getUserFriend
+      summary: Get a UserFriend
+      description: Gets the details of a single instance of a `UserFriend`.
+    put:
+      requestBody:
+        description: Updated `UserFriend` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserFriend'
+        required: true
+      tags:
+      - UserFriend
+      responses:
+        "202":
+          description: Successful response.
+      operationId: updateUserFriend
+      summary: Update a UserFriend
+      description: Updates an existing `UserFriend`.
+    delete:
+      tags:
+      - UserFriend
+      responses:
+        "204":
+          description: Successful response.
+      operationId: deleteUserFriend
+      summary: Delete a UserFriend
+      description: Deletes an existing `UserFriend`.
+    parameters:
+    - name: userfriendId
+      description: A unique identifier for a `UserFriend`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /userfollowers:
+    summary: Path used to manage the list of userfriends.
+    description: "The REST endpoint/path used to list and create zero or more `UserFollower`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      tags:
+      - UserFollower
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserFriend'
+          description: Successful response - returns an array of `UserFollower` entities.
+      operationId: getUserFollowers
+      summary: List All UserFollowers
+      description: Gets a list of all `UserFollower` entities.
+    post:
+      requestBody:
+        description: A new `UserFollower` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserFriend'
+        required: true
+      tags:
+      - UserFollower
+      responses:
+        "201":
+          description: Successful response.
+      operationId: createUserFollower
+      summary: Create a UserFollower
+      description: Creates a new instance of a `UserFollowers`.
+  /userfollowers/{userfollowerId}/:
+    summary: Path used to manage a single UserFriend.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `UserFollower`.  This path contains `GET`, `PUT`, and `DELETE` operations\
+      \ used to perform the get, update, and delete tasks, respectively."
+    get:
+      tags:
+      - UserFollower
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserFriend'
+          description: Successful response - returns a single `UserFollower`.
+      operationId: getUserFollower
+      summary: Get a UserFollower
+      description: Gets the details of a single instance of a `UserFollower`.
+    put:
+      requestBody:
+        description: Updated `UserFollower` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserFriend'
+        required: true
+      tags:
+      - UserFollower
+      responses:
+        "202":
+          description: Successful response.
+      operationId: updateUserFollower
+      summary: Update a UserFollower
+      description: Updates an existing `UserFollower`.
+    delete:
+      tags:
+      - UserFollower
+      responses:
+        "204":
+          description: Successful response.
+      operationId: deleteUserFollower
+      summary: Delete a UserFollower
+      description: Deletes an existing `UserFollower`.
+    parameters:
+    - name: userfollowerId
+      description: A unique identifier for a UserFollower
+      schema:
+        type: integer
+      in: path
+      required: true
+  /userposts:
+    summary: Path used to manage the list of userposts.
+    description: "The REST endpoint/path used to list and create zero or more `UserPost`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      tags:
+      - UserPost
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserPost'
+          description: Successful response - returns an array of `UserPost` entities.
+        "404":
+          description: User post not found.
+      operationId: getUserPosts
+      summary: List All UserPosts
+      description: Gets a list of all `UserPost` entities.
+    post:
+      requestBody:
+        description: A new `UserPost` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPost'
+        required: true
+      tags:
+      - UserPost
+      responses:
+        "201":
+          description: Successful response.
+        "404":
+          description: User post not found.
+      operationId: createUserPost
+      summary: Create a UserPost
+      description: Creates a new instance of a `UserPost`.
+  /userposts/{userpostId}:
+    summary: Path used to manage a single UserPost.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `UserPost`.  This path contains `GET`, `PUT`, and `DELETE` operations\
+      \ used to perform the get, update, and delete tasks, respectively."
+    get:
+      tags:
+      - UserPost
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPost'
+          description: Successful response - returns a single `UserPost`.
+        "404":
+          description: User post not found.
+      operationId: getUserPost
+      summary: Get a UserPost
+      description: Gets the details of a single instance of a `UserPost`.
+    put:
+      requestBody:
+        description: Updated `UserPost` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPost'
+        required: true
+      tags:
+      - UserPost
+      responses:
+        "202":
+          description: Successful response.
+        "404":
+          description: User post not found.
+      operationId: updateUserPost
+      summary: Update a UserPost
+      description: Updates an existing `UserPost`.
+    delete:
+      tags:
+      - UserPost
+      responses:
+        "204":
+          description: Successful response.
+        "404":
+          description: User post not found.
+      operationId: deleteUserPost
+      summary: Delete a UserPost
+      description: Deletes an existing `UserPost`.
+    parameters:
+    - name: userpostId
+      description: A unique identifier for a `UserPost`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /trainingplans/{trainingplanId}:
+    summary: Path used to manage a single TrainingPlan.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `TrainingPlan`.  This path contains `GET`, `PUT`, and `DELETE` operations\
+      \ used to perform the get, update, and delete tasks, respectively."
+    get:
+      tags:
+      - TrainingPlan
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrainingPlan'
+          description: Successful response - returns a single `TrainingPlan`.
+        "404":
+          description: Training plan not found.
+      operationId: getTrainingPlan
+      summary: Get a TrainingPlan
+      description: Gets the details of a single instance of a `TrainingPlan`.
+    put:
+      requestBody:
+        description: Updated `TrainingPlan` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainingPlan'
+        required: true
+      tags:
+      - TrainingPlan
+      responses:
+        "202":
+          description: Successful response.
+        "404":
+          description: Training plan not found.
+      operationId: updateTrainingPlan
+      summary: Update a TrainingPlan
+      description: Updates an existing `TrainingPlan`.
+    delete:
+      tags:
+      - TrainingPlan
+      responses:
+        "204":
+          description: Successful response.
+        "404":
+          description: Training plan not found.
+      operationId: deleteTrainingPlan
+      summary: Delete a TrainingPlan
+      description: Deletes an existing `TrainingPlan`.
+    parameters:
+    - name: trainingplanId
+      description: A unique identifier for a `TrainingPlan`.
+      schema:
+        type: string
+      in: path
+      required: true
+  /trainingplans:
+    summary: Path used to manage the list of trainingplans.
+    description: "The REST endpoint/path used to list and create zero or more `TrainingPlan`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      tags:
+      - TrainingPlan
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TrainingPlan'
+          description: Successful response - returns an array of `TrainingPlan` entities.
+        "404":
+          description: Training plan not found.
+      operationId: getTrainingPlans
+      summary: List All TrainingPlans
+      description: Gets a list of all `TrainingPlan` entities.
+    post:
+      requestBody:
+        description: A new `TrainingPlan` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrainingPlan'
+        required: true
+      tags:
+      - TrainingPlan
+      responses:
+        "201":
+          description: Successful response.
+        "404":
+          description: Training plan not found.
+      operationId: createTrainingPlan
+      summary: Create a TrainingPlan
+      description: Creates a new instance of a `TrainingPlan`.
+components:
+  schemas:
+    Event:
+      title: Root Type for Event
+      description: ""
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+        sport:
+          type: string
+        eventTime:
+          format: date-time
+          type: string
+        description:
+          type: string
+        eventDuration:
+          format: date-time
+          type: string
+      example:
+        id: 1
+        sport: football
+        eventTime: 2022-10-18T17:32:43.396206
+        description: this is a description
+        eventDuration: 2022-10-18T17:32:43.396206
+    User:
+      title: Root Type for User
+      description: ""
+      required:
+      - email
+      - firstName
+      - id
+      - lastName
+      - registeredAt
+      type: object
+      properties:
+        id:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phoneNumber:
+          type: string
+        passwordHash:
+          type: string
+        registeredAt:
+          format: date-time
+          type: string
+        email:
+          type: string
+      example:
+        id: 1
+        firstName: First name
+        lastName: Last name
+        phoneNumber: "0123456789"
+        passwordHast: qi8H8R7OM4xMUNMPuRAZxlY
+        registeredAt: 2022-10-18T17:32:43.396206
+        email: email@example.com
+    Group:
+      title: Root Type for Group
+      description: ""
+      required:
+      - createdBy
+      - id
+      - title
+      type: object
+      properties:
+        id:
+          type: integer
+        sport:
+          type: string
+        createdBy:
+          format: date-time
+          type: string
+        updatedBy:
+          format: date-time
+          type: string
+        title:
+          type: string
+        summary:
+          type: string
+      example:
+        id: 1
+        sport: football
+        createdBy: 2022-10-18T17:32:43.396206
+        updatedBy: 2022-10-18T17:32:43.396206
+        title: We love football
+        summary: This is a group for people that love football
+    GroupMember:
+      title: Root Type for GroupMember
+      description: ""
+      required:
+      - int
+      - roleId
+      - status
+      - groupId
+      type: object
+      properties:
+        int:
+          type: integer
+        roleId:
+          type: integer
+        status:
+          type: integer
+        groupId:
+          description: ""
+          type: integer
+      example:
+        int: 1
+        roleId: 1
+        status: 1
+    GroupMessage:
+      title: Root Type for GroupMessage
+      description: '    '
+      required:
+      - id
+      - message
+      - userId
+      - updatedAt
+      - createdAt
+      - groupId
+      type: object
+      properties:
+        id:
+          type: integer
+        groupId:
+          type: integer
+        message:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+        userId:
+          type: integer
+      example:
+        id: 1
+        groupId: 1
+        message: This is an example message.
+        createdAt: 2022-10-18T17:32:43.396206
+        updatedAt: 2022-10-18T17:32:43.396206
+        userId: 1
+    GroupPost:
+      title: Root Type for GroupPost
+      description: ""
+      required:
+      - createdAt
+      - groupMemberGroupId
+      - groupMemberId
+      - id
+      - message
+      - title
+      type: object
+      properties:
+        id:
+          type: integer
+        message:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        title:
+          type: string
+        groupMemberId:
+          type: integer
+        groupMemberGroupId:
+          type: integer
+      example:
+        id: 1
+        message: This is an example message.
+        createdAt: 2022-10-18T17:32:43.396206
+        updatedAt: 2022-10-18T17:32:43.396206
+        title: Post regarding something
+        groupMemberId: 1
+        groupMemberGroupId: 1
+    UserMessage:
+      title: Root Type for UserMessage
+      description: '    '
+      required:
+      - createdAt
+      - id
+      - message
+      - userId
+      type: object
+      properties:
+        id:
+          type: integer
+        message:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        userId:
+          type: integer
+      example:
+        id: 1
+        message: This is an example message.
+        createdAt: 2022-10-18T17:32:43.396206
+        updatedAt: 2022-10-18T17:32:43.396206
+        userId: 1
+    UserFriend:
+      title: Root Type for UserFriend
+      description: ""
+      required:
+      - createdAt
+      - id
+      - userId
+      type: object
+      properties:
+        id:
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          type: string
+        userId:
+          type: integer
+      example:
+        id: 1
+        createdAt: 2022-10-18T17:32:43.396206
+        updatedAt: 2022-10-18T17:32:43.396206
+        userId: 1
+    UserFollower:
+      title: Root Type for UserFriend
+      description: ""
+      required:
+      - createdAt
+      - id
+      - userId
+      type: object
+      properties:
+        id:
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          type: string
+        userId:
+          type: integer
+      example:
+        id: 1
+        createdAt: 2022-10-18T17:32:43.396206
+        updatedAt: 2022-10-18T17:32:43.396206
+        userId: 1
+    UserPost:
+      title: Root Type for UserPost
+      description: ""
+      required:
+      - createdAt
+      - id
+      - message
+      - title
+      - userId
+      type: object
+      properties:
+        id:
+          type: integer
+        message:
+          type: string
+        title:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          type: string
+        userId:
+          type: integer
+      example:
+        id: 1
+        message: This is an example message.
+        title: This is an example title.
+        createdAt: 2022-10-18T17:32:43.396206
+        updatedAt: 2022-10-18T17:32:43.396206
+        userId: 1
+    TrainingPlan:
+      title: Root Type for TrainingPlan
+      description: ""
+      required:
+      - createdBy
+      - description
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        createdBy:
+          type: integer
+        description:
+          type: string
+      example:
+        id: 1
+        type: Calisthenics
+        createdBy: 1
+        description: This is a plan built for beginners
+tags:
+- name: User
+  description: ""
+- name: Event
+  description: ""
+- name: Group
+  description: ""
+- name: GroupPost
+  description: ""
+- name: UserPost
+  description: ""
+- name: TrainingPlan
+  description: ""
+- name: UserFollower
+  description: ""
+- name: UserFriend
+  description: ""
+- name: UserMessage
+  description: ""
+- name: GroupMessage
+  description: ""
+- name: GroupMember
+  description: ""
