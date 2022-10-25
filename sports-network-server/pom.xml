@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.12</version>
+		<version>2.7.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dragos</groupId>
@@ -36,6 +36,11 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-mysql</artifactId>
 		</dependency>
 
 		<dependency>
@@ -79,6 +84,12 @@
 			<version>2.4.6</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>7.0.5.Final</version>
+		</dependency>
+
     </dependencies>
 	<build>
 		<plugins>
@@ -100,14 +111,33 @@
 								${project.basedir}/src/main/resources/SportsSocialMediaNetworkAPI.yaml
 							</inputSpec>
 							<generatorName>spring</generatorName>
+							<library>spring-boot</library>
 							<apiPackage>com.dragos.sportsnetworkserver.api</apiPackage>
 							<modelPackage>com.dragos.sportsnetworkserver.model</modelPackage>
-							<supportingFilesToGenerate>
-								ApiUtil.java
-							</supportingFilesToGenerate>
 							<configOptions>
-								<serializableModel>true</serializableModel>
+								<delegatePattern>false</delegatePattern>
 								<dateLibrary>java8</dateLibrary>
+								<bigDecimalAsString>true</bigDecimalAsString>
+								<booleanGetterPrefix>is</booleanGetterPrefix>
+								<serializableModel>true</serializableModel>
+								<useOptional>true</useOptional>
+								<useTags>true</useTags>
+								<useBeanValidation>true</useBeanValidation>
+
+								<unhandledException>true</unhandledException>
+
+								<performBeanValidation>true</performBeanValidation>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
+								<!--suppress UnresolvedMavenProperty -->
+								<additionalModelTypeAnnotations>;@lombok.Builder;@lombok.extern.jackson.Jacksonized;
+								</additionalModelTypeAnnotations>
+								<skipDefaultInterface>true</skipDefaultInterface>
+								<interfaceOnly>true</interfaceOnly>
+								<swaggerDocketConfig>true</swaggerDocketConfig>
+								<title>SportsSocialMediaNetwork</title>
+
+								<licenseName>TODO</licenseName>
+								<licenseUrl>TODO</licenseUrl>
 							</configOptions>
 						</configuration>
 					</execution>
