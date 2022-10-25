@@ -1,4 +1,4 @@
-package controllers;
+package com.dragos.sportsnetworkserver.controllers;
 import com.dragos.sportsnetworkserver.api.EventApi;
 import com.dragos.sportsnetworkserver.model.Event;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 public class EventsController implements EventApi {
+
     @Override
     public ResponseEntity<Void> createEvent(Event event) {
         return null;
@@ -16,7 +17,6 @@ public class EventsController implements EventApi {
     @Override
     public ResponseEntity<Void> deleteEvent(String eventId) {
         return null;
-
     }
 
     @Override
@@ -26,7 +26,6 @@ public class EventsController implements EventApi {
 
     @Override
     public ResponseEntity<List<Event>> getEvents() {
-        System.out.println("got events");
         return null;
     }
 

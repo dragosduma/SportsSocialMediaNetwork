@@ -1,4 +1,4 @@
-package com.dragos.sportsnetworkserver.model;
+package com.dragos.sportsnetworkserver.domain;
 
 public class Event {
 }
