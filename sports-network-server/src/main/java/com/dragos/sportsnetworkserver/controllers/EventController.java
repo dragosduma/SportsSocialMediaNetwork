@@ -1,27 +1,38 @@
 package com.dragos.sportsnetworkserver.controllers;
+
 import com.dragos.sportsnetworkserver.api.EventApi;
 import com.dragos.sportsnetworkserver.model.Event;
+import com.dragos.sportsnetworkserver.service.EventService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
-public class EventsController implements EventApi {
+public class EventController implements EventApi {
+    @Autowired
+    private EventService eventService;
+
+    private EventController(EventService eventService){
+        this.eventService = eventService;
+    }
 
     @Override
     public ResponseEntity<Void> createEvent(Event event) {
-        return null;
+        eventService.saveEvent(event);
+        return ResponseEntity.ok().build();
     }
 
     @Override
     public ResponseEntity<Void> deleteEvent(String eventId) {
-        return null;
+        eventService.deleteEventById(Integer.parseInt(eventId));
+        return ResponseEntity.ok().build();
     }
 
     @Override
     public ResponseEntity<Event> getEvent(String eventId) {
-        return null;
+        return ResponseEntity.ok(eventService.findById(Integer.parseInt(eventId)));
     }
 
     @Override

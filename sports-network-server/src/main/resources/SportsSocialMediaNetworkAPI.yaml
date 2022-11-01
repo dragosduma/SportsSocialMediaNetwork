@@ -1242,6 +1242,8 @@ components:
       properties:
         id:
           type: integer
+        targetId:
+          type: integer
         message:
           type: string
         createdAt:
@@ -1325,6 +1327,7 @@ components:
           format: date-time
           type: string
         updatedAt:
+          format: date-time
           type: string
         userId:
           type: integer
