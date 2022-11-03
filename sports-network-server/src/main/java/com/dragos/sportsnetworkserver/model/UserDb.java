@@ -8,7 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 @Entity
 @Data
@@ -19,7 +20,7 @@ public class UserDb {
     @Id
     private int id;
 
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "last_name")
@@ -32,29 +33,24 @@ public class UserDb {
     private String passwordHash;
 
     @Column(name = "registered_at")
-    private OffsetDateTime registeredAt;
+    private LocalDateTime registeredAt;
 
     @Column(name = "last_login")
-    private OffsetDateTime lastLogin;
+    private LocalDateTime lastLogin;
 
     private String profile;
 
     private String email;
 
-//    public void setRegisteredAt(String odtString) {
-//        final String pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSxx";
-//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(pattern);
-//        this.lastLogin = OffsetDateTime.parse(odtString, dateTimeFormatter);
-//    }
-
     public static UserDb mapToDbUser(User user) {
         UserDb u = new UserDb();
-        u.setFirstName(user.getFirstName());
-        u.setLastName(user.getLastName());
-        u.setEmail(user.getEmail());
-        u.setPasswordHash(user.getPasswordHash());
-        u.setPhoneNumber(user.getPhoneNumber());
-        u.setRegisteredAt(user.getRegisteredAt());
+        u.id = user.getId();
+        u.firstName = user.getFirstName();
+        u.lastName = user.getLastName();
+        u.email = user.getEmail();
+        u.passwordHash = user.getPasswordHash();
+        u.phoneNumber = user.getPhoneNumber();
+        u.registeredAt = user.getRegisteredAt().toLocalDateTime();
         return u;
     }
 
@@ -66,8 +62,7 @@ public class UserDb {
                 .email(this.getEmail())
                 .passwordHash(this.getPasswordHash())
                 .phoneNumber(this.getPhoneNumber())
-                .registeredAt(this.getRegisteredAt())
+                .registeredAt(this.getRegisteredAt().atOffset(ZoneOffset.UTC))
                 .build();
-
     }
 }

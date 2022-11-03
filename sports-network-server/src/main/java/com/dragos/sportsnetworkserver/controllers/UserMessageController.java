@@ -38,7 +38,7 @@ public class UserMessageController implements UserMessageApi {
     }
 
     @Override
-    public ResponseEntity<Void> updateUserMessage(String usermessageId, UserMessage userMessage) {
+    public ResponseEntity<Void> updateUserMessage(String userMessageId, UserMessage userMessage) {
         return null;
     }
 }

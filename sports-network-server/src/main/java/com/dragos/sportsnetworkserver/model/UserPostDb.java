@@ -8,7 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 @Entity
 @Data
@@ -24,10 +25,10 @@ public class UserPostDb {
     private String title;
 
     @Column(name="created_at")
-    private OffsetDateTime createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name="updated_at")
-    private OffsetDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
     private int userId;
 
@@ -36,8 +37,8 @@ public class UserPostDb {
         u.id = userPost.getId();
         u.message = userPost.getMessage();
         u.title = userPost.getTitle();
-        u.createdAt = userPost.getCreatedAt();
-        u.updatedAt = userPost.getUpdatedAt();
+        u.createdAt = userPost.getCreatedAt().toLocalDateTime();
+        u.updatedAt = userPost.getUpdatedAt().toLocalDateTime();
         u.userId = userPost.getUserId();
         return u;
     }
@@ -48,8 +49,8 @@ public class UserPostDb {
                 .id(this.getId())
                 .message(this.getMessage())
                 .title(this.getTitle())
-                .createdAt(this.getCreatedAt())
-                .updatedAt(this.getUpdatedAt())
+                .createdAt(this.getCreatedAt().atOffset(ZoneOffset.UTC))
+                .updatedAt(this.getUpdatedAt().atOffset(ZoneOffset.UTC))
                 .userId(this.getUserId())
                 .build();
     }

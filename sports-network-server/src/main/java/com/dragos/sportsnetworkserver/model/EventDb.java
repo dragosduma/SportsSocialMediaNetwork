@@ -8,7 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 @Entity
 @Data
@@ -21,32 +22,32 @@ public class EventDb {
 
     private String sport;
 
-    @Column(name="event_time")
-    private OffsetDateTime eventTime;
+    @Column(name = "event_time")
+    private LocalDateTime eventTime;
 
     private String description;
 
     @Column(name = "event_duration")
-    private OffsetDateTime eventDuration;
+    private LocalDateTime eventDuration;
 
     public static EventDb mapToDbEvent(Event event) {
         EventDb e = new EventDb();
-        e.id=event.getId();
-        e.sport=e.getSport();
-        e.description=event.getDescription();
-        e.eventDuration= e.getEventDuration();
-        e.eventTime=e.getEventTime();
+        e.id = event.getId();
+        e.sport = event.getSport();
+        e.description = event.getDescription();
+        e.eventDuration = event.getEventDuration().toLocalDateTime();
+        e.eventTime = event.getEventTime().toLocalDateTime();
         return e;
     }
 
-    public Event mapToRestEvent(){
+    public Event mapToRestEvent() {
         return Event
                 .builder()
                 .id(this.id)
                 .sport(this.sport)
                 .description(this.description)
-                .eventDuration(this.eventDuration)
-                .eventTime(this.eventTime)
+                .eventDuration(this.getEventDuration().atOffset(ZoneOffset.UTC))
+                .eventTime(this.getEventTime().atOffset(ZoneOffset.UTC))
                 .build();
     }
 

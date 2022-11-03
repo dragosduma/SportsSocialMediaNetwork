@@ -1073,9 +1073,9 @@ components:
       example:
         id: 1
         sport: football
-        eventTime: 2022-10-18T17:32:43.396206
+        eventTime: 2020-07-21T12:12:23.000+0200
         description: this is a description
-        eventDuration: 2022-10-18T17:32:43.396206
+        eventDuration: 2020-07-21T12:12:23.000+0200
     User:
       title: Root Type for User
       description: ""
@@ -1108,7 +1108,7 @@ components:
         lastName: Last name
         phoneNumber: "0123456789"
         passwordHast: qi8H8R7OM4xMUNMPuRAZxlY
-        registeredAt: 2022-10-18T17:32:43.396206
+        registeredAt: 2020-07-21T12:12:23.000+0200
         email: email@example.com
     Group:
       title: Root Type for Group
@@ -1136,8 +1136,8 @@ components:
       example:
         id: 1
         sport: football
-        createdBy: 2022-10-18T17:32:43.396206
-        updatedBy: 2022-10-18T17:32:43.396206
+        createdBy: 2020-07-21T12:12:23.000+0200
+        updatedBy: 2020-07-21T12:12:23.000+0200
         title: We love football
         summary: This is a group for people that love football
     GroupMember:
@@ -1191,8 +1191,8 @@ components:
         id: 1
         groupId: 1
         message: This is an example message.
-        createdAt: 2022-10-18T17:32:43.396206
-        updatedAt: 2022-10-18T17:32:43.396206
+        createdAt: 2020-07-21T12:12:23.000+0200
+        updatedAt: 2020-07-21T12:12:23.000+0200
         userId: 1
     GroupPost:
       title: Root Type for GroupPost
@@ -1225,8 +1225,8 @@ components:
       example:
         id: 1
         message: This is an example message.
-        createdAt: 2022-10-18T17:32:43.396206
-        updatedAt: 2022-10-18T17:32:43.396206
+        createdAt: 2020-07-21T12:12:23.000+0200
+        updatedAt: 2020-07-21T12:12:23.000+0200
         title: Post regarding something
         groupMemberId: 1
         groupMemberGroupId: 1
@@ -1257,8 +1257,8 @@ components:
       example:
         id: 1
         message: This is an example message.
-        createdAt: 2022-10-18T17:32:43.396206
-        updatedAt: 2022-10-18T17:32:43.396206
+        createdAt: 2020-07-21T12:12:23.000+0200
+        updatedAt: 2020-07-21T12:12:23.000+0200
         userId: 1
     UserFriend:
       title: Root Type for UserFriend
@@ -1280,8 +1280,8 @@ components:
           type: integer
       example:
         id: 1
-        createdAt: 2022-10-18T17:32:43.396206
-        updatedAt: 2022-10-18T17:32:43.396206
+        createdAt: 2020-07-21T12:12:23.000+0200
+        updatedAt: 2020-07-21T12:12:23.000+0200
         userId: 1
     UserFollower:
       title: Root Type for UserFriend
@@ -1303,8 +1303,8 @@ components:
           type: integer
       example:
         id: 1
-        createdAt: 2022-10-18T17:32:43.396206
-        updatedAt: 2022-10-18T17:32:43.396206
+        createdAt: 2020-07-21T12:12:23.000+0200
+        updatedAt: 2020-07-21T12:12:23.000+0200
         userId: 1
     UserPost:
       title: Root Type for UserPost
@@ -1335,8 +1335,8 @@ components:
         id: 1
         message: This is an example message.
         title: This is an example title.
-        createdAt: 2022-10-18T17:32:43.396206
-        updatedAt: 2022-10-18T17:32:43.396206
+        createdAt: 2020-07-21T12:12:23.000+0200
+        updatedAt: 2020-07-21T12:12:23.000+0200
         userId: 1
     TrainingPlan:
       title: Root Type for TrainingPlan
