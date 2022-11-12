@@ -7,15 +7,17 @@ export default function Header() {
     return (
         <div className="shadow-sm border-b sticky top-0 bg-white z-30">
             <div className='flex items-center justify-between max-w-6xl mx-4 xl:mx-auto'>
-                <div className='h-40 w-40 relative hidden lg:inline-grid'>
+                <div className='h-24 w-24 relative hidden lg:inline-grid'>
                     <Image
                         src="/Sports social media network.png"
+                        alt='Sports social media network'
                         layout='fill'
-                        lassName='object-contain' />
+                        className='object-contain' />
                 </div>
-                <div className='h-40 w-40 relative lg:hidden'>
+                <div className='h-14 w-14 relative lg:hidden'>
                     <Image
                         src="/Sports social media network small.png"
+                        alt='Sports social media network small'
                         layout='fill'
                         className='object-contain' />
                 </div>
