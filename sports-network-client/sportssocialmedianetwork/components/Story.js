@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function Story({ img, username }) {
     return (
         <div>

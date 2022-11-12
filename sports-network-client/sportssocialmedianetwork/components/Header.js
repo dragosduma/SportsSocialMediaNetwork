@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from 'next/image';
 import { SearchIcon, PlusCircleIcon } from '@heroicons/react/outline';
 import { HomeIcon } from "@heroicons/react/solid";
