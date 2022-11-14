@@ -35,7 +35,7 @@ public class UserPostController implements UserPostApi {
 
     @Override
     public ResponseEntity<List<UserPost>> getUserPosts() {
-        return null;
+        return ResponseEntity.ok(userPostService.findAll());
     }
 
     @Override

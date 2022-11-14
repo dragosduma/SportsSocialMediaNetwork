@@ -40,7 +40,7 @@ public class UserController implements UserApi {
 
     @Override
     public ResponseEntity<List<User>> getUsers() {
-        return null;
+        return ResponseEntity.ok(userService.findAll());
     }
 
     @Override

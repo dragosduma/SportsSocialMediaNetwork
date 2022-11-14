@@ -6,6 +6,9 @@ import com.dragos.sportsnetworkserver.repository.UserPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserPostService {
     @Autowired
@@ -13,6 +16,15 @@ public class UserPostService {
 
     public UserPostService (UserPostRepository userPostRepository) {
         this.userPostRepository = userPostRepository;
+    }
+
+    public List<UserPost> findAll() {
+        List<UserPost> allUserPosts = new ArrayList<>();
+        Iterable<UserPostDb> userPosts = userPostRepository.findAll();
+        for(UserPostDb userPostDb : userPosts){
+            allUserPosts.add(userPostDb.mapToRestUserPost());
+        }
+        return allUserPosts;
     }
 
     public UserPostDb saveUserPost(UserPost userPost) {

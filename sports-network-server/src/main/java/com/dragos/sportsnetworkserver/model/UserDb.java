@@ -57,6 +57,7 @@ public class UserDb {
     public User mapToRestUser() {
         return User
                 .builder()
+                .id(this.getId())
                 .firstName(this.getFirstName())
                 .lastName(this.getLastName())
                 .email(this.getEmail())

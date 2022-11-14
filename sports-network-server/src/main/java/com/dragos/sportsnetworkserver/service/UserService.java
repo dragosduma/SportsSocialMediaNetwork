@@ -1,11 +1,13 @@
 package com.dragos.sportsnetworkserver.service;
 
-import com.dragos.sportsnetworkserver.model.UserDb;
 import com.dragos.sportsnetworkserver.model.User;
+import com.dragos.sportsnetworkserver.model.UserDb;
 import com.dragos.sportsnetworkserver.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -21,6 +23,15 @@ public class UserService {
     public UserDb saveUser(User user) {
         UserDb userDb = UserDb.mapToDbUser(user);
         return userRepository.save(userDb);
+    }
+
+    public List<User> findAll() {
+        List<User> allUsers = new ArrayList<>();
+        Iterable<UserDb> users = userRepository.findAll();
+        for(UserDb userDb : users){
+            allUsers.add(userDb.mapToRestUser());
+        }
+        return allUsers;
     }
 
     public User findById(int id) {
