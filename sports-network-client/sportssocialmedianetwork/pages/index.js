@@ -1,9 +1,15 @@
 import Head from 'next/head'
 import Feed from '../components/Feed'
 import Header from '../components/Header'
+import axios from 'axios'
 
 
 export default function Home() {
+
+  axios.get('http://localhost:8080/users').then(respone => {
+    console.log(respone.data);
+  });
+
   return (
     <div className='bg-gray-50 min-h-screen'>
       <Head>
