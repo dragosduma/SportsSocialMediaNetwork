@@ -4,11 +4,13 @@ import com.dragos.sportsnetworkserver.api.UserMessageApi;
 import com.dragos.sportsnetworkserver.model.UserMessage;
 import com.dragos.sportsnetworkserver.service.UserMessageService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class UserMessageController implements UserMessageApi {
     private UserMessageService userMessageService;
 

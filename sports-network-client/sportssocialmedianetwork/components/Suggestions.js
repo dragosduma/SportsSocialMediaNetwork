@@ -1,17 +1,18 @@
-import minifaker from "minifaker";
-import "minifaker/locales/en";
 import { useEffect, useState } from "react";
+import axios from 'axios';
 
 export default function Suggestions() {
+
     const [suggestions, setSuggestions] = useState([]);
+    const getSuggestions = async () => {
+        const { data } = await axios.get('http://localhost:8080/users');
+        setSuggestions(data);
+    };
+
     useEffect(() => {
-        const suggestions = minifaker.array(5, (i) => ({
-            username: minifaker.username({ locale: "en" }).toLowerCase(),
-            jobTitle: minifaker.jobTitle(),
-            id: i,
-        }));
-        setSuggestions(suggestions);
+        getSuggestions();
     }, []);
+
     return (
         <div className="mt-4 ml-10">
             <div className="flex justify-between mb-5 text-sm">
@@ -31,9 +32,9 @@ export default function Suggestions() {
                         alt=""
                     />
                     <div className="flex-1 ml-4">
-                        <h2 className="font-semibold text-sm">{suggestion.username}</h2>
+                        <h2 className="font-semibold text-sm">{suggestion.firstName} {suggestion.lastName}</h2>
                         <h3 className="text-sm text-gray-400 truncate w-[230px]">
-                            {suggestion.jobTitle}
+                            {suggestion.phoneNumber}
                         </h3>
                     </div>
                     <button className="font-semibold text-blue-400 text-sm">

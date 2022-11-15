@@ -30,6 +30,7 @@ public class UserPostDb {
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
+    @Column(name="user_id")
     private int userId;
 
     public static UserPostDb mapToDbUserPost(UserPost userPost) {
