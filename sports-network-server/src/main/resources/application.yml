@@ -19,3 +19,5 @@ spring:
     password: root
     hikari:
       maximum-pool-size: 10
+  jwt:
+    secret: mysuperalsiofduashdfalsjdkhfsakjdhflafaas91023789a8fasdop9fhu123081273098ashydao8uihfa1i2u3hj1o2iluh3dfasecretkey123
