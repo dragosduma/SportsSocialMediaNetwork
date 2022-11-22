@@ -57,10 +57,13 @@ public class UserService implements UserDetailsService {
         userRepository.deleteById(id);
     }
 
-
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        return new org.springframework.security.core.userdetails.User("admin","password",new ArrayList<>());
+    public UserDetails loadUserByUsername(String username) {
+        Optional<UserDb> userDb = userRepository.findByEmail(username);
+        User user = userDb.get().mapToRestUser();
+        if(userDb == null)
+            throw new UsernameNotFoundException(username);
+        return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPasswordHash(),new ArrayList<>());
     }
 }
+
