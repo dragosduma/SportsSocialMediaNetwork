@@ -27,7 +27,7 @@ public class HomeController {
         return "hello";
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/auth/login")
     public JWTResponse authenticate(@RequestBody JWTRequest jwtRequest) throws Exception{
 
         try{

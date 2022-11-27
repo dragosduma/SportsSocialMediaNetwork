@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 
 export default function Suggestions() {
-    const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJlbWFpbDFAZXhhbXBsZS5jb20iLCJpYXQiOjE2NjkxNTI2NjEsImV4cCI6MTY2OTE3MDY2MX0.FQoXfQRUOJao1NeUxA8aymVk8PsW2KlNvBZqBRLmKgE4g7wF4vabGNJhkyVN2qfH2V4fEbTI-RHd-wFUW4UFRA";
 
-    const [suggestions, setSuggestions] = useState([]);
+    const ISSERVER = typeof window === "undefined";
+    if (!ISSERVER)
+        var token = JSON.parse(localStorage.getItem("user")).jwtToken
+
     const getSuggestions = async () => {
         const { data } = await axios.get('/users',
             {
@@ -16,7 +18,8 @@ export default function Suggestions() {
         setSuggestions(data);
     };
 
-    useEffect(() => {
+    const [suggestions, setSuggestions] = useState([]);
+        useEffect(() => {
         getSuggestions();
     }, []);
 
