@@ -12,7 +12,7 @@ export default function Suggestions() {
             },
             (error) => {
                 console.log("Private info", error.response);
-                if(error.response && error.response.data === 403) {
+                if (error.response && error.response.data === 403) {
                     authService.logout();
                     Router.push("login")
                 }
@@ -23,7 +23,7 @@ export default function Suggestions() {
     return (
         <div className="mt-4 ml-10">
             <div className="flex justify-between mb-5 text-sm">
-                <h3 className="font-bold text-gray-400">Suggestion for you</h3>
+                <h3 className="font-bold text-gray-400">Suggested for you</h3>
                 <button className="text-gray-600 font-semibold">See all</button>
             </div>
             {suggestions.map((suggestion) => (

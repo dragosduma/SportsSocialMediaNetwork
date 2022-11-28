@@ -1,11 +1,15 @@
+import Router from "next/router"
+
 export default function authHeader() {
     const ISSERVER = typeof window === "undefined";
-    if (!ISSERVER)
-        var token = JSON.parse(localStorage.getItem("user")).jwtToken
+    if (!ISSERVER) {
+        var token = JSON.parse(localStorage.getItem("user"))
+    }
 
     if (token) {
-        return { "Authorization": `Bearer ${token}` }
+        var jwtToken = token.jwtToken
+        return { "Authorization": `Bearer ${jwtToken}` }
     } else {
-        return {};
+        Router.push("login");
     }
 }

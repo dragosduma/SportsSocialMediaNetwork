@@ -1,4 +1,5 @@
 import axios from "axios"
+import Router from "next/router";
 
 const API_URL = "/auth"
 
@@ -8,8 +9,8 @@ const signup = (username, password) => {
             username,
             password,
         })
-        .then((response)=> {
-            if(response.data.jwtToken) {
+        .then((response) => {
+            if (response.data.jwtToken) {
                 localStorage.setItem("user", JSON.stringify(response.data));
             }
             return response.data;
@@ -23,7 +24,7 @@ const login = (username, password) => {
             password
         })
         .then((response) => {
-            if(response.data.jwtToken) {
+            if (response.data.jwtToken) {
                 localStorage.setItem("user", JSON.stringify(response.data));
             }
             return response.data;
@@ -32,6 +33,7 @@ const login = (username, password) => {
 
 const logout = () => {
     localStorage.removeItem("user");
+    Router.push("login")
 };
 
 const getCurrentUser = () => {
