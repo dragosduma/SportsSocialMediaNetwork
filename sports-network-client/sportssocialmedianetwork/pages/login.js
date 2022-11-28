@@ -1,38 +1,28 @@
 import NextLink from "next/link";
 import { FaLock, FaUser } from 'react-icons/fa';
 import Router from 'next/router';
+import { useState } from "react";
+import authService from "../services/auth-service";
 
 export default function Login() {
-  const handleSubmit = async (event) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
+  const handleLogin = async (event) => {
     event.preventDefault();
-
-    const data = {
-      username: event.target.email.value,
-      password: event.target.password.value,
+    try {
+      await authService.login(username, password).then(
+        () => {
+          Router.push("feed");
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (err) {
+      console.log(err);
     }
-    const JSONdata = JSON.stringify(data)
-    const endpoint = "/auth/login"
-
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSONdata,
-    }
-    const response = await fetch(endpoint, options)
-    if(response.status==403)
-      return;
-    
-    const result = await response.json()
-
-    if (result) {
-      localStorage.setItem("user", JSON.stringify(result));
-       
-       Router.push('feed');
-    }
-  }
+  };
 
   return (
     <div className="">
@@ -49,13 +39,15 @@ export default function Login() {
               <p>Login to your account</p>
             </div>
 
-            <form onSubmit={handleSubmit} className='flex flex-col items-center space-y-4'>
+            <form onSubmit={handleLogin} className='flex flex-col items-center space-y-4'>
               <div className='relative'>
                 <span className='absolute flex inset-y-0 items-center pl-4 text-gray-400'><FaUser /></span>
                 <input className='border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 rounded-md transition focus:ring-2 focus:ring-cyan-300'
                   placeholder="Email..."
                   type="email"
                   id="email"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   required />
               </div>
               <div className='relative'>
@@ -64,9 +56,12 @@ export default function Login() {
                   placeholder="Password..."
                   type="password"
                   id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required />
               </div>
-              <button className='bg-cyan-400 font-medium inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-cyan-500' type='submit'>
+              <button className='bg-cyan-400 font-medium inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-cyan-500'
+                type='submit'>
                 <FaUser className='mr-2' /> Login now
               </button>
             </form>

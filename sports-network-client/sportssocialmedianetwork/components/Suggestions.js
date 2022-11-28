@@ -1,26 +1,23 @@
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import Router from 'next/router';
+import authService from "../services/auth-service";
+import userService from "../services/user-service";
 
 export default function Suggestions() {
-
-    const ISSERVER = typeof window === "undefined";
-    if (!ISSERVER)
-        var token = JSON.parse(localStorage.getItem("user")).jwtToken
-
-    const getSuggestions = async () => {
-        const { data } = await axios.get('/users',
-            {
-                headers:
-                {
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-        setSuggestions(data);
-    };
-
     const [suggestions, setSuggestions] = useState([]);
-        useEffect(() => {
-        getSuggestions();
+    useEffect(() => {
+        userService.getAllUsers().then(
+            (response) => {
+                setSuggestions(response.data);
+            },
+            (error) => {
+                console.log("Private info", error.response);
+                if(error.response && error.response.data === 403) {
+                    authService.logout();
+                    Router.push("login")
+                }
+            }
+        )
     }, []);
 
     return (
