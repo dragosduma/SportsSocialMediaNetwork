@@ -42,6 +42,9 @@ public class UserDb {
 
     private String email;
 
+    @Column(name = "user_image")
+    private String userImage;
+
     public static UserDb mapToDbUser(User user) {
         UserDb u = new UserDb();
         u.id = user.getId();
@@ -51,6 +54,7 @@ public class UserDb {
         u.passwordHash = user.getPasswordHash();
         u.phoneNumber = user.getPhoneNumber();
         u.registeredAt = user.getRegisteredAt().toLocalDateTime();
+        u.userImage = user.getUserImage();
         return u;
     }
 
@@ -64,6 +68,7 @@ public class UserDb {
                 .passwordHash(this.getPasswordHash())
                 .phoneNumber(this.getPhoneNumber())
                 .registeredAt(this.getRegisteredAt().atOffset(ZoneOffset.UTC))
+                .userImage(this.getUserImage())
                 .build();
     }
 }

@@ -1102,6 +1102,9 @@ components:
           type: string
         email:
           type: string
+        userImage:
+          description: ""
+          type: string
       example:
         id: 1
         firstName: First name
@@ -1110,6 +1113,7 @@ components:
         passwordHast: qi8H8R7OM4xMUNMPuRAZxlY
         registeredAt: 2020-07-21T12:12:23.000+0200
         email: email@example.com
+        userImage: iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAA
     Group:
       title: Root Type for Group
       description: ""
@@ -1222,6 +1226,9 @@ components:
           type: integer
         groupMemberGroupId:
           type: integer
+        image:
+          description: ""
+          type: string
       example:
         id: 1
         message: This is an example message.
@@ -1230,6 +1237,7 @@ components:
         title: Post regarding something
         groupMemberId: 1
         groupMemberGroupId: 1
+        image: iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAA
     UserMessage:
       title: Root Type for UserMessage
       description: '    '
@@ -1242,8 +1250,6 @@ components:
       properties:
         id:
           type: integer
-        targetId:
-          type: integer
         message:
           type: string
         createdAt:
@@ -1254,12 +1260,16 @@ components:
           type: string
         userId:
           type: integer
+        targetId:
+          description: '    '
+          type: integer
       example:
         id: 1
         message: This is an example message.
         createdAt: 2020-07-21T12:12:23.000+0200
         updatedAt: 2020-07-21T12:12:23.000+0200
         userId: 1
+        targetId: 1
     UserFriend:
       title: Root Type for UserFriend
       description: ""
@@ -1331,6 +1341,9 @@ components:
           type: string
         userId:
           type: integer
+        image:
+          description: ""
+          type: string
       example:
         id: 1
         message: This is an example message.
@@ -1338,6 +1351,7 @@ components:
         createdAt: 2020-07-21T12:12:23.000+0200
         updatedAt: 2020-07-21T12:12:23.000+0200
         userId: 1
+        image: iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAA
     TrainingPlan:
       title: Root Type for TrainingPlan
       description: ""

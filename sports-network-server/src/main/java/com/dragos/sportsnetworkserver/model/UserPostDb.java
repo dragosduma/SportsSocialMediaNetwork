@@ -33,6 +33,9 @@ public class UserPostDb {
     @Column(name="user_id")
     private int userId;
 
+    @Column(name="image")
+    private String image;
+
     public static UserPostDb mapToDbUserPost(UserPost userPost) {
         UserPostDb u = new UserPostDb();
         u.id = userPost.getId();
@@ -41,6 +44,7 @@ public class UserPostDb {
         u.createdAt = userPost.getCreatedAt().toLocalDateTime();
         u.updatedAt = userPost.getUpdatedAt().toLocalDateTime();
         u.userId = userPost.getUserId();
+        u.image = userPost.getImage();
         return u;
     }
 
@@ -53,6 +57,7 @@ public class UserPostDb {
                 .createdAt(this.getCreatedAt().atOffset(ZoneOffset.UTC))
                 .updatedAt(this.getUpdatedAt().atOffset(ZoneOffset.UTC))
                 .userId(this.getUserId())
+                .image(this.getImage())
                 .build();
     }
 }
