@@ -1,3 +1,6 @@
+import authService from "../services/auth-service"
+
+
 export default function MiniProfile() {
     return (
         <div className="flex items-center justify-between mt-14 ml-10">
@@ -6,7 +9,7 @@ export default function MiniProfile() {
                 <h2 className="font-bold">username</h2>
                 <h3 className="text-sm text-gray-400">Welcome to ssmn</h3>
             </div>
-            <button className="font-semibold text-blue-400 text-sm">Sign out</button>
+            <button className="font-semibold text-blue-400 text-sm" onClick={authService.logout}>Sign out</button>
         </div>
     )
 }
