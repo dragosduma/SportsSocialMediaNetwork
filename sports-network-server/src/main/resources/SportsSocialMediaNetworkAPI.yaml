@@ -883,7 +883,7 @@ paths:
       requestBody:
         description: A new `UserPost` to be created.
         content:
-          application/json:
+          multipart/form-data:
             schema:
               $ref: '#/components/schemas/UserPost'
         required: true
@@ -1320,38 +1320,16 @@ components:
       title: Root Type for UserPost
       description: ""
       required:
-      - createdAt
-      - id
-      - message
-      - title
-      - userId
+      - image
       type: object
       properties:
-        id:
-          type: integer
-        message:
+        caption:
           type: string
-        title:
-          type: string
-        createdAt:
-          format: date-time
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        userId:
-          type: integer
         image:
-          description: ""
           type: string
+          format: binary
       example:
-        id: 1
-        message: This is an example message.
-        title: This is an example title.
-        createdAt: 2020-07-21T12:12:23.000+0200
-        updatedAt: 2020-07-21T12:12:23.000+0200
-        userId: 1
-        image: iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAA
+
     TrainingPlan:
       title: Root Type for TrainingPlan
       description: ""

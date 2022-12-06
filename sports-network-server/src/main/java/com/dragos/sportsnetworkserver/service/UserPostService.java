@@ -5,6 +5,7 @@ import com.dragos.sportsnetworkserver.model.UserPostDb;
 import com.dragos.sportsnetworkserver.repository.UserPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +28,8 @@ public class UserPostService {
         return allUserPosts;
     }
 
-    public UserPostDb saveUserPost(UserPost userPost) {
-        UserPostDb userPostDb = UserPostDb.mapToDbUserPost(userPost);
+    public UserPostDb saveUserPost(MultipartFile fileName, String caption) {
+        UserPostDb userPostDb = UserPostDb.mapToDbUserPost(fileName, caption);
         return userPostRepository.save(userPostDb);
     }
 

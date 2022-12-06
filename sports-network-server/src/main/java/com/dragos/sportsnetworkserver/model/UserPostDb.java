@@ -3,13 +3,13 @@ package com.dragos.sportsnetworkserver.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 
 @Entity
 @Data
@@ -20,9 +20,8 @@ public class UserPostDb {
     @Id
     private int id;
 
-    private String message;
-
-    private String title;
+    @Column(name="message")
+    private String caption;
 
     @Column(name="created_at")
     private LocalDateTime createdAt;
@@ -36,28 +35,17 @@ public class UserPostDb {
     @Column(name="image")
     private String image;
 
-    public static UserPostDb mapToDbUserPost(UserPost userPost) {
+    public static UserPostDb mapToDbUserPost(MultipartFile file, String caption) {
         UserPostDb u = new UserPostDb();
-        u.id = userPost.getId();
-        u.message = userPost.getMessage();
-        u.title = userPost.getTitle();
-        u.createdAt = userPost.getCreatedAt().toLocalDateTime();
-        u.updatedAt = userPost.getUpdatedAt().toLocalDateTime();
-        u.userId = userPost.getUserId();
-        u.image = userPost.getImage();
+        u.caption = caption;
+        u.image = file.toString();
         return u;
     }
 
     public UserPost mapToRestUserPost() {
         return UserPost
                 .builder()
-                .id(this.getId())
-                .message(this.getMessage())
-                .title(this.getTitle())
-                .createdAt(this.getCreatedAt().atOffset(ZoneOffset.UTC))
-                .updatedAt(this.getUpdatedAt().atOffset(ZoneOffset.UTC))
-                .userId(this.getUserId())
-                .image(this.getImage())
+                .caption(this.getCaption())
                 .build();
     }
 }

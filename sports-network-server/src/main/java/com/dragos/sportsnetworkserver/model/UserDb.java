@@ -47,7 +47,6 @@ public class UserDb {
 
     public static UserDb mapToDbUser(User user) {
         UserDb u = new UserDb();
-        u.id = user.getId();
         u.firstName = user.getFirstName();
         u.lastName = user.getLastName();
         u.email = user.getEmail();
