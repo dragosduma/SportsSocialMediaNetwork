@@ -8,10 +8,10 @@ import axios from "axios";
 export default function UploadModal() {
     const [open, setOpen] = useRecoilState(modalState);
     const [selectedFile, setSelectedFile] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [caption, setCaption] = useState("");
 
-    const getBase64StringFromDataURL = (dataURL) =>
-        dataURL.replace('data:', '').replace(/^.+,/, '');
+    // const getBase64StringFromDataURL = (dataURL) =>
+    //     dataURL.replace('data:', '').replace(/^.+,/, '');
 
     const dataURLtoFile = (dataurl, filename) => {
         const arr = dataurl.split(',')
@@ -28,15 +28,10 @@ export default function UploadModal() {
 
     const handleUpload = async (event) => {
         event.preventDefault();
-        let imageFile = selectedFile;
-        let caption = captionRef.current.value;
-
-        const file = dataURLtoFile(imageFile);
         let formData = new FormData();
-        formData.append("image", file, file.name);
-        console.log(file)
+        const file = dataURLtoFile(selectedFile)
+        formData.append("image", file);
         formData.append("caption", caption);
-        console.log(formData)
         var token = JSON.parse(localStorage.getItem("user")).jwtToken
         return axios
             .post("/userposts",
@@ -44,14 +39,12 @@ export default function UploadModal() {
                 {
                     headers: {
                         'authorization': `Bearer ` + token,
-                        'content-type': 'multipart/form-data'
+                        'Content-Type': 'multipart/form-data'
                     }
+                }).then(response => {
+                    console.log(response.data)
+                    setOpen(false);
                 })
-
-        // if (loading)
-        //     return;
-
-        // setLoading(true);
     }
 
     function addImageToPost(event) {
@@ -66,7 +59,6 @@ export default function UploadModal() {
     }
 
     const filePickerRef = useRef(null);
-    const captionRef = useRef(null);
 
     return (
         <div>
@@ -105,10 +97,11 @@ export default function UploadModal() {
                                 maxLength="150"
                                 placeholder="Please enter your description..."
                                 className="m-4 border-none text-center w-full focus:ring-0"
-                                ref={captionRef}
+                                value={caption}
+                                onChange={(e) => setCaption(e.target.value)}
                             />
                             <button
-                                disabled={!selectedFile || loading}
+                                disabled={!selectedFile}
                                 type='submit'
                                 className="w-full bg-red-600 text-white p-2 shadow-md hover:brightness-125 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:hover:brightness-100">
                                 Upload Post
