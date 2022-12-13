@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +15,11 @@ import java.util.List;
 public class UserPostService {
     @Autowired
     private UserPostRepository userPostRepository;
+    private UserService userService;
 
-    public UserPostService (UserPostRepository userPostRepository) {
+    public UserPostService (UserPostRepository userPostRepository, UserService userService) {
         this.userPostRepository = userPostRepository;
+        this.userService = userService;
     }
 
     public List<UserPost> findAll() {
@@ -28,8 +31,10 @@ public class UserPostService {
         return allUserPosts;
     }
 
-    public UserPostDb saveUserPost(MultipartFile fileName, String caption) {
-        UserPostDb userPostDb = UserPostDb.mapToDbUserPost(fileName, caption);
+    public UserPostDb saveUserPost(MultipartFile fileName, String caption) throws IOException {
+        String userEmail = userService.getUsernameFromUserDetails();
+        int id = userService.getUserIdFromEmail(userEmail);
+        UserPostDb userPostDb = UserPostDb.mapToDbUserPost(fileName, caption, id);
         return userPostRepository.save(userPostDb);
     }
 

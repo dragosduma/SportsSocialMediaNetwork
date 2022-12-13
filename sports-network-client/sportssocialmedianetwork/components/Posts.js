@@ -1,32 +1,34 @@
 import Post from './Post';
+import { useEffect, useState } from 'react';
+import postService from '../services/post-service';
 
 export default function Posts() {
-    const posts = [
-        {
-            id: "1",
-            username: "username",
-            userImg: "/placeholder.jpg",
-            img: "https://www.shutterstock.com/ro/image-illustration/photorealistic-3d-illustration-futuristic-city-style-2000612981",
-            caption: "thanks"
-        },
-        {
-            id: "2",
-            username: "username2",
-            userImg: "/placeholder.jpg",
-            img: "https://www.shutterstock.com/ro/image-illustration/future-city-downtown-skyscrapers-neon-cyberpunk-1945617913",
-            caption: "cool"
-        }
-    ];
+    const [posts, setPosts] = useState([]);
+    useEffect(() => {
+        postService.getAllPosts().then(
+            (response) => {
+                setPosts(response.data);
+                console.log(response.data);
+            },
+            (error) => {
+                console.log("Private info", error.response);
+                if (error.response && error.response.data === 403) {
+                    authService.logout();
+                    Router.push("login")
+                }
+            }
+        )
+    }, []);
+
     return (
         <div>
             {posts.map(post => (
                 <Post
-                    key={post.id}
-                    id={post.id}
-                    username={post.username}
-                    userImg={post.userImg}
-                    img={post.img}
-                    caption={post.caption}
+                    key={posts.id}
+                    id={posts.id}
+                    username={posts.username}
+                    img={posts.img}
+                    caption={posts.caption}
                 />
             ))}
         </div>

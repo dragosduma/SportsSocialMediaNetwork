@@ -4,6 +4,7 @@ import com.dragos.sportsnetworkserver.model.User;
 import com.dragos.sportsnetworkserver.model.UserDb;
 import com.dragos.sportsnetworkserver.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -55,6 +56,17 @@ public class UserService implements UserDetailsService {
 
     public void deleteUserById(int id) {
         userRepository.deleteById(id);
+    }
+
+    public int getUserIdFromEmail(String email) {
+        Optional <UserDb> userDb = findByEmail(email);
+        return userDb.get().getId();
+    }
+
+    public String getUsernameFromUserDetails()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userDetails.getUsername();
     }
 
     @Override
