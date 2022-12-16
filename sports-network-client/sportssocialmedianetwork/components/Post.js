@@ -11,7 +11,7 @@ export default function Post({ img, userImg, caption, username, id }) {
             </div>
 
             {/*post image */}
-            <img className="object-cover w-full" src={userImg} alt="" />
+            <img className="object-cover w-full" src={`data:image/jpeg;base64,${img}`} alt="" />
             {/*post buttons */}
             <div className="flex justify-between px-4 pt-4">
                 <div className="flex space-x-4">

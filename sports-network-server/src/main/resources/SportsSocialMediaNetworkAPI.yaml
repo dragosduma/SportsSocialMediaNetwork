@@ -872,13 +872,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/UserPost'
+                  $ref: '#/components/schemas/RestUserPost'
           description: Successful response - returns an array of `UserPost` entities.
         "404":
           description: User post not found.
       operationId: getUserPosts
       summary: List All UserPosts
-      description: Gets a list of all `UserPost` entities.
+      description: Gets a list of all `RestUserPost` entities.
     post:
       requestBody:
         description: A new `UserPost` to be created.
@@ -910,7 +910,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserPost'
+                $ref: '#/components/schemas/RestUserPost'
           description: Successful response - returns a single `UserPost`.
         "404":
           description: User post not found.
@@ -1320,7 +1320,7 @@ components:
       title: Root Type for UserPost
       description: ""
       required:
-      - image
+        - image
       type: object
       properties:
         caption:
@@ -1329,7 +1329,6 @@ components:
           type: string
           format: binary
       example:
-
     TrainingPlan:
       title: Root Type for TrainingPlan
       description: ""
@@ -1353,6 +1352,36 @@ components:
         type: Calisthenics
         createdBy: 1
         description: This is a plan built for beginners
+    RestUserPost:
+      description: The user post returned to client app.
+      required:
+      - id
+      - createdAt
+      - userId
+      - image
+      type: object
+      properties:
+        id:
+          description: ""
+          type: integer
+        caption:
+          description: ""
+          type: string
+        createdAt:
+          format: date-time
+          description: ""
+          type: string
+        updatedAt:
+          format: date-time
+          description: ""
+          type: string
+        userId:
+          description: ""
+          type: integer
+        image:
+          format: byte
+          description: ""
+          type: string
 tags:
 - name: User
   description: ""
@@ -1375,4 +1404,6 @@ tags:
 - name: GroupMessage
   description: ""
 - name: GroupMember
+  description: ""
+- name: RestUserPost
   description: ""

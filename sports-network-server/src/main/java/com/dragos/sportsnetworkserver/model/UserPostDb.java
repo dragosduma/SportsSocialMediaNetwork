@@ -1,6 +1,5 @@
 package com.dragos.sportsnetworkserver.model;
 
-import com.dragos.sportsnetworkserver.utility.CustomMultipartFile;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 @Entity
 @Data
@@ -47,17 +47,15 @@ public class UserPostDb {
         return u;
     }
 
-    public MultipartFile getFileFromByteString(byte[] bytes)
-    {
-        CustomMultipartFile file = new CustomMultipartFile(bytes);
-        return file;
-    }
-
-    public UserPost mapToRestUserPost() {
-        return UserPost
+    public RestUserPost mapToRestUserPost() {
+        return RestUserPost
                 .builder()
                 .caption(this.getCaption())
-                .image(getFileFromByteString(this.getImage()).getResource())
+                .image(this.getImage())
+                .id(this.getId())
+                .createdAt(this.getCreatedAt().atOffset(ZoneOffset.UTC))
+                .updatedAt(this.getUpdatedAt().atOffset(ZoneOffset.UTC))
+                .userId(this.getUserId())
                 .build();
     }
 }

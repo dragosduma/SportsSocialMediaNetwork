@@ -1,6 +1,7 @@
 package com.dragos.sportsnetworkserver.controllers;
 
 import com.dragos.sportsnetworkserver.api.UserPostApi;
+import com.dragos.sportsnetworkserver.model.RestUserPost;
 import com.dragos.sportsnetworkserver.model.UserPost;
 import com.dragos.sportsnetworkserver.service.UserPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +29,19 @@ public class UserPostController implements UserPostApi {
         return ResponseEntity.ok().build();
     }
 
+
     @Override
     public ResponseEntity<Void> deleteUserPost(String userPostId) {
         return null;
     }
 
     @Override
-    public ResponseEntity<UserPost> getUserPost(String userPostId) {
+    public ResponseEntity<RestUserPost> getUserPost(String userPostId) {
         return null;
     }
 
     @Override
-    public ResponseEntity<List<UserPost>> getUserPosts() {
+    public ResponseEntity<List<RestUserPost>> getUserPosts() {
         return ResponseEntity.ok(userPostService.findAll());
     }
 

@@ -22,12 +22,12 @@ export default function Posts() {
 
     return (
         <div>
-            {posts.map(post => (
+            {posts.map(posts => (
                 <Post
                     key={posts.id}
                     id={posts.id}
                     username={posts.username}
-                    img={posts.img}
+                    img={posts.image}
                     caption={posts.caption}
                 />
             ))}

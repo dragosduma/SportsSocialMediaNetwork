@@ -1,6 +1,6 @@
 package com.dragos.sportsnetworkserver.service;
 
-import com.dragos.sportsnetworkserver.model.UserPost;
+import com.dragos.sportsnetworkserver.model.RestUserPost;
 import com.dragos.sportsnetworkserver.model.UserPostDb;
 import com.dragos.sportsnetworkserver.repository.UserPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +22,8 @@ public class UserPostService {
         this.userService = userService;
     }
 
-    public List<UserPost> findAll() {
-        List<UserPost> allUserPosts = new ArrayList<>();
+    public List<RestUserPost> findAll() {
+        List<RestUserPost> allUserPosts = new ArrayList<>();
         Iterable<UserPostDb> userPosts = userPostRepository.findAll();
         for(UserPostDb userPostDb : userPosts){
             allUserPosts.add(userPostDb.mapToRestUserPost());
@@ -38,7 +38,7 @@ public class UserPostService {
         return userPostRepository.save(userPostDb);
     }
 
-    public UserPost findById(int id) {
+    public RestUserPost findById(int id) {
         return userPostRepository.findById(id).get().mapToRestUserPost();
     }
 
