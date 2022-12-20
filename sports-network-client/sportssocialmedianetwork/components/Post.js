@@ -1,6 +1,34 @@
 import { DotsHorizontalIcon, HeartIcon, ChatIcon, BookmarkIcon, EmojiHappyIcon } from '@heroicons/react/outline';
+import { useState } from 'react';
+import { Button } from "react-bootstrap"
+import authHeader from '../services/auth-header';
+import axios from "axios";
 
 export default function Post({ img, userImg, caption, username, id }) {
+    const [comment, setComment] = useState({
+        text: "",
+        postId: id,
+    });
+
+    const [comments, setComments] = useState([])
+
+    function updateComment(value) {
+        const commentCopy = { ...comment }
+        commentCopy.text = value;
+        setComment(commentCopy);
+    }
+
+    function submitComment() {
+        return axios
+            .post("/postcomments",
+                comment,
+                {
+                    headers: authHeader()
+                }).then(response => {
+                    console.log(response)
+                })
+    }
+
     return (
         <div className='bg-white my-7 border rounded-md'>
             {/*post header*/}
@@ -27,8 +55,19 @@ export default function Post({ img, userImg, caption, username, id }) {
             {/*post input box */}
             <form className="flex item-center p-4">
                 <EmojiHappyIcon className='h-7' />
-                <input className="border-none flex-1 focus:ring-0" type="text" placeholder='Enter your comment...' />
-                <button className='text-blue-400 font-bold'>Post</button>
+                <textarea
+                    onChange={(event) => updateComment(event.target.value)}
+                    className="border-none flex-1 focus:ring-0"
+                    type="text"
+                    placeholder='Enter your comment...'
+                ></textarea>
+                <Button
+                    onClick={() => submitComment()}
+                    disabled={!comment.text.trim()}
+                    className='text-blue-400 font-bold disabled:text-blue-200'
+                >
+                    Post
+                </Button>
             </form>
         </div>
     );

@@ -4,9 +4,9 @@ info:
   title: SportsSocialMediaNetwork API
   version: 1.0.0
 servers:
-- url: http://localhost:8080
-  description: |
-    Localhost
+  - url: http://localhost:8080
+    description: |
+      Localhost
 paths:
   /events/{eventId}:
     summary: Path used to manage a single Event.
@@ -15,7 +15,7 @@ paths:
       \ to perform the get, update, and delete tasks, respectively."
     get:
       tags:
-      - Event
+        - Event
       responses:
         "200":
           content:
@@ -37,7 +37,7 @@ paths:
               $ref: '#/components/schemas/Event'
         required: true
       tags:
-      - Event
+        - Event
       responses:
         "202":
           description: Successful response.
@@ -48,7 +48,7 @@ paths:
       description: Updates an existing `Event`.
     delete:
       tags:
-      - Event
+        - Event
       responses:
         "204":
           description: Successful response.
@@ -58,12 +58,12 @@ paths:
       summary: Delete a Event
       description: Deletes an existing `Event`.
     parameters:
-    - name: eventId
-      description: A unique identifier for a `Event`.
-      schema:
-        type: string
-      in: path
-      required: true
+      - name: eventId
+        description: A unique identifier for a `Event`.
+        schema:
+          type: string
+        in: path
+        required: true
   /events:
     summary: Path used to manage the list of events.
     description: "The REST endpoint/path used to list and create zero or more `Event`\
@@ -71,7 +71,7 @@ paths:
       \ list and create tasks, respectively."
     get:
       tags:
-      - Event
+        - Event
       responses:
         "200":
           content:
@@ -95,7 +95,7 @@ paths:
               $ref: '#/components/schemas/Event'
         required: true
       tags:
-      - Event
+        - Event
       responses:
         "201":
           description: Successful response.
@@ -111,7 +111,7 @@ paths:
       \ list and create tasks, respectively."
     get:
       tags:
-      - User
+        - User
       responses:
         "200":
           content:
@@ -135,7 +135,7 @@ paths:
               $ref: '#/components/schemas/User'
         required: true
       tags:
-      - User
+        - User
       responses:
         "201":
           description: Successful response.
@@ -151,7 +151,7 @@ paths:
       \ to perform the get, update, and delete tasks, respectively."
     get:
       tags:
-      - User
+        - User
       responses:
         "200":
           content:
@@ -173,7 +173,7 @@ paths:
               $ref: '#/components/schemas/User'
         required: true
       tags:
-      - User
+        - User
       responses:
         "202":
           description: Successful response.
@@ -184,7 +184,7 @@ paths:
       description: Updates an existing `User`.
     delete:
       tags:
-      - User
+        - User
       responses:
         "204":
           description: Successful response.
@@ -194,12 +194,12 @@ paths:
       summary: Delete a User
       description: Deletes an existing `User`.
     parameters:
-    - name: userId
-      description: A unique identifier for a `User`.
-      schema:
-        type: string
-      in: path
-      required: true
+      - name: userId
+        description: A unique identifier for a `User`.
+        schema:
+          type: string
+        in: path
+        required: true
   /groups:
     summary: Path used to manage the list of groups.
     description: "The REST endpoint/path used to list and create zero or more `Group`\
@@ -207,7 +207,7 @@ paths:
       \ list and create tasks, respectively."
     get:
       tags:
-      - Group
+        - Group
       responses:
         "200":
           content:
@@ -231,7 +231,7 @@ paths:
               $ref: '#/components/schemas/Group'
         required: true
       tags:
-      - Group
+        - Group
       responses:
         "201":
           description: Successful response.
@@ -247,7 +247,7 @@ paths:
       \ to perform the get, update, and delete tasks, respectively."
     get:
       tags:
-      - Group
+        - Group
       responses:
         "200":
           content:
@@ -269,7 +269,7 @@ paths:
               $ref: '#/components/schemas/Group'
         required: true
       tags:
-      - Group
+        - Group
       responses:
         "202":
           description: Successful response.
@@ -280,7 +280,7 @@ paths:
       description: Updates an existing `Group`.
     delete:
       tags:
-      - Group
+        - Group
       responses:
         "204":
           description: Successful response.
@@ -290,12 +290,12 @@ paths:
       summary: Delete a Group
       description: Deletes an existing `Group`.
     parameters:
-    - name: groupId
-      description: A unique identifier for a `Group`.
-      schema:
-        type: string
-      in: path
-      required: true
+      - name: groupId
+        description: A unique identifier for a `Group`.
+        schema:
+          type: string
+        in: path
+        required: true
   /groupmembers/{groupmemberId}:
     summary: Path used to manage a single GroupMember.
     description: "The REST endpoint/path used to get, update, and delete single instances\
@@ -303,7 +303,7 @@ paths:
       \ used to perform the get, update, and delete tasks, respectively."
     get:
       tags:
-      - GroupMember
+        - GroupMember
       responses:
         "200":
           content:
@@ -326,7 +326,7 @@ paths:
               $ref: '#/components/schemas/GroupMember'
         required: true
       tags:
-      - GroupMember
+        - GroupMember
       responses:
         "202":
           description: Successful response.
@@ -338,7 +338,7 @@ paths:
       description: Updates an existing `GroupMember`.
     delete:
       tags:
-      - GroupMember
+        - GroupMember
       responses:
         "204":
           description: Successful response.
@@ -349,12 +349,12 @@ paths:
       summary: Delete a GroupMember
       description: Deletes an existing `GroupMember`.
     parameters:
-    - name: groupmemberId
-      description: A unique identifier for a `GroupMember`.
-      schema:
-        type: string
-      in: path
-      required: true
+      - name: groupmemberId
+        description: A unique identifier for a `GroupMember`.
+        schema:
+          type: string
+        in: path
+        required: true
   /groupmembers:
     summary: Path used to manage the list of groupmembers.
     description: "The REST endpoint/path used to list and create zero or more `GroupMember`\
@@ -362,7 +362,7 @@ paths:
       \ list and create tasks, respectively."
     get:
       tags:
-      - GroupMember
+        - GroupMember
       responses:
         "200":
           content:
@@ -387,7 +387,7 @@ paths:
               $ref: '#/components/schemas/GroupMember'
         required: true
       tags:
-      - GroupMember
+        - GroupMember
       responses:
         "201":
           description: Successful response.
@@ -404,7 +404,7 @@ paths:
       \ used to perform the get, update, and delete tasks, respectively."
     get:
       tags:
-      - GroupMessage
+        - GroupMessage
       responses:
         "200":
           content:
@@ -426,7 +426,7 @@ paths:
               $ref: '#/components/schemas/GroupMessage'
         required: true
       tags:
-      - GroupMessage
+        - GroupMessage
       responses:
         "202":
           description: Successful response.
@@ -437,7 +437,7 @@ paths:
       description: Updates an existing `GroupMessage`.
     delete:
       tags:
-      - GroupMessage
+        - GroupMessage
       responses:
         "204":
           description: Successful response.
@@ -447,12 +447,12 @@ paths:
       summary: Delete a GroupMessage
       description: Deletes an existing `GroupMessage`.
     parameters:
-    - name: groupmessageId
-      description: A unique identifier for a `GroupMessage`.
-      schema:
-        type: string
-      in: path
-      required: true
+      - name: groupmessageId
+        description: A unique identifier for a `GroupMessage`.
+        schema:
+          type: string
+        in: path
+        required: true
   /groupmessages:
     summary: Path used to manage the list of groupmessages.
     description: "The REST endpoint/path used to list and create zero or more `GroupMessage`\
@@ -460,7 +460,7 @@ paths:
       \ list and create tasks, respectively."
     get:
       tags:
-      - GroupMessage
+        - GroupMessage
       responses:
         "200":
           content:
@@ -484,7 +484,7 @@ paths:
               $ref: '#/components/schemas/GroupMessage'
         required: true
       tags:
-      - GroupMessage
+        - GroupMessage
       responses:
         "201":
           description: Successful response.
@@ -500,7 +500,7 @@ paths:
       \ list and create tasks, respectively."
     get:
       tags:
-      - GroupPost
+        - GroupPost
       responses:
         "200":
           content:
@@ -524,7 +524,7 @@ paths:
               $ref: '#/components/schemas/GroupPost'
         required: true
       tags:
-      - GroupPost
+        - GroupPost
       responses:
         "201":
           description: Successful response.
@@ -540,7 +540,7 @@ paths:
       \ used to perform the get, update, and delete tasks, respectively."
     get:
       tags:
-      - GroupPost
+        - GroupPost
       responses:
         "200":
           content:
@@ -562,7 +562,7 @@ paths:
               $ref: '#/components/schemas/GroupPost'
         required: true
       tags:
-      - GroupPost
+        - GroupPost
       responses:
         "202":
           description: Successful response.
@@ -573,7 +573,7 @@ paths:
       description: Updates an existing `GroupPost`.
     delete:
       tags:
-      - GroupPost
+        - GroupPost
       responses:
         "204":
           description: Successful response.
@@ -583,12 +583,12 @@ paths:
       summary: Delete a GroupPost
       description: Deletes an existing `GroupPost`.
     parameters:
-    - name: grouppostId
-      description: A unique identifier for a `GroupPost`.
-      schema:
-        type: string
-      in: path
-      required: true
+      - name: grouppostId
+        description: A unique identifier for a `GroupPost`.
+        schema:
+          type: string
+        in: path
+        required: true
   /usermessages:
     summary: Path used to manage the list of usermessages.
     description: "The REST endpoint/path used to list and create zero or more `UserMessage`\
@@ -596,7 +596,7 @@ paths:
       \ list and create tasks, respectively."
     get:
       tags:
-      - UserMessage
+        - UserMessage
       responses:
         "200":
           content:
@@ -620,7 +620,7 @@ paths:
               $ref: '#/components/schemas/UserMessage'
         required: true
       tags:
-      - UserMessage
+        - UserMessage
       responses:
         "201":
           description: Successful response.
@@ -636,7 +636,7 @@ paths:
       \ used to perform the get, update, and delete tasks, respectively."
     get:
       tags:
-      - UserMessage
+        - UserMessage
       responses:
         "200":
           content:
@@ -658,7 +658,7 @@ paths:
               $ref: '#/components/schemas/UserMessage'
         required: true
       tags:
-      - UserMessage
+        - UserMessage
       responses:
         "202":
           description: Successful response.
@@ -669,7 +669,7 @@ paths:
       description: Updates an existing `UserMessage`.
     delete:
       tags:
-      - UserMessage
+        - UserMessage
       responses:
         "204":
           description: Successful response.
@@ -679,12 +679,12 @@ paths:
       summary: Delete a UserMessage
       description: Deletes an existing `UserMessage`.
     parameters:
-    - name: usermessageId
-      description: A unique identifier for a `UserMessage`.
-      schema:
-        type: string
-      in: path
-      required: true
+      - name: usermessageId
+        description: A unique identifier for a `UserMessage`.
+        schema:
+          type: string
+        in: path
+        required: true
   /userfriends:
     summary: Path used to manage the list of userfriends.
     description: "The REST endpoint/path used to list and create zero or more `UserFriend`\
@@ -692,7 +692,7 @@ paths:
       \ list and create tasks, respectively."
     get:
       tags:
-      - UserFriend
+        - UserFriend
       responses:
         "200":
           content:
@@ -714,7 +714,7 @@ paths:
               $ref: '#/components/schemas/UserFriend'
         required: true
       tags:
-      - UserFriend
+        - UserFriend
       responses:
         "201":
           description: Successful response.
@@ -728,7 +728,7 @@ paths:
       \ used to perform the get, update, and delete tasks, respectively."
     get:
       tags:
-      - UserFriend
+        - UserFriend
       responses:
         "200":
           content:
@@ -748,7 +748,7 @@ paths:
               $ref: '#/components/schemas/UserFriend'
         required: true
       tags:
-      - UserFriend
+        - UserFriend
       responses:
         "202":
           description: Successful response.
@@ -757,7 +757,7 @@ paths:
       description: Updates an existing `UserFriend`.
     delete:
       tags:
-      - UserFriend
+        - UserFriend
       responses:
         "204":
           description: Successful response.
@@ -765,12 +765,12 @@ paths:
       summary: Delete a UserFriend
       description: Deletes an existing `UserFriend`.
     parameters:
-    - name: userfriendId
-      description: A unique identifier for a `UserFriend`.
-      schema:
-        type: string
-      in: path
-      required: true
+      - name: userfriendId
+        description: A unique identifier for a `UserFriend`.
+        schema:
+          type: string
+        in: path
+        required: true
   /userfollowers:
     summary: Path used to manage the list of userfriends.
     description: "The REST endpoint/path used to list and create zero or more `UserFollower`\
@@ -778,7 +778,7 @@ paths:
       \ list and create tasks, respectively."
     get:
       tags:
-      - UserFollower
+        - UserFollower
       responses:
         "200":
           content:
@@ -800,7 +800,7 @@ paths:
               $ref: '#/components/schemas/UserFriend'
         required: true
       tags:
-      - UserFollower
+        - UserFollower
       responses:
         "201":
           description: Successful response.
@@ -814,7 +814,7 @@ paths:
       \ used to perform the get, update, and delete tasks, respectively."
     get:
       tags:
-      - UserFollower
+        - UserFollower
       responses:
         "200":
           content:
@@ -834,7 +834,7 @@ paths:
               $ref: '#/components/schemas/UserFriend'
         required: true
       tags:
-      - UserFollower
+        - UserFollower
       responses:
         "202":
           description: Successful response.
@@ -843,7 +843,7 @@ paths:
       description: Updates an existing `UserFollower`.
     delete:
       tags:
-      - UserFollower
+        - UserFollower
       responses:
         "204":
           description: Successful response.
@@ -851,12 +851,12 @@ paths:
       summary: Delete a UserFollower
       description: Deletes an existing `UserFollower`.
     parameters:
-    - name: userfollowerId
-      description: A unique identifier for a UserFollower
-      schema:
-        type: integer
-      in: path
-      required: true
+      - name: userfollowerId
+        description: A unique identifier for a UserFollower
+        schema:
+          type: integer
+        in: path
+        required: true
   /userposts:
     summary: Path used to manage the list of userposts.
     description: "The REST endpoint/path used to list and create zero or more `UserPost`\
@@ -864,7 +864,7 @@ paths:
       \ list and create tasks, respectively."
     get:
       tags:
-      - UserPost
+        - UserPost
       responses:
         "200":
           content:
@@ -888,7 +888,7 @@ paths:
               $ref: '#/components/schemas/UserPost'
         required: true
       tags:
-      - UserPost
+        - UserPost
       responses:
         "201":
           description: Successful response.
@@ -904,7 +904,7 @@ paths:
       \ used to perform the get, update, and delete tasks, respectively."
     get:
       tags:
-      - UserPost
+        - UserPost
       responses:
         "200":
           content:
@@ -926,7 +926,7 @@ paths:
               $ref: '#/components/schemas/UserPost'
         required: true
       tags:
-      - UserPost
+        - UserPost
       responses:
         "202":
           description: Successful response.
@@ -937,7 +937,7 @@ paths:
       description: Updates an existing `UserPost`.
     delete:
       tags:
-      - UserPost
+        - UserPost
       responses:
         "204":
           description: Successful response.
@@ -947,12 +947,12 @@ paths:
       summary: Delete a UserPost
       description: Deletes an existing `UserPost`.
     parameters:
-    - name: userpostId
-      description: A unique identifier for a `UserPost`.
-      schema:
-        type: string
-      in: path
-      required: true
+      - name: userpostId
+        description: A unique identifier for a `UserPost`.
+        schema:
+          type: string
+        in: path
+        required: true
   /trainingplans/{trainingplanId}:
     summary: Path used to manage a single TrainingPlan.
     description: "The REST endpoint/path used to get, update, and delete single instances\
@@ -960,7 +960,7 @@ paths:
       \ used to perform the get, update, and delete tasks, respectively."
     get:
       tags:
-      - TrainingPlan
+        - TrainingPlan
       responses:
         "200":
           content:
@@ -982,7 +982,7 @@ paths:
               $ref: '#/components/schemas/TrainingPlan'
         required: true
       tags:
-      - TrainingPlan
+        - TrainingPlan
       responses:
         "202":
           description: Successful response.
@@ -993,7 +993,7 @@ paths:
       description: Updates an existing `TrainingPlan`.
     delete:
       tags:
-      - TrainingPlan
+        - TrainingPlan
       responses:
         "204":
           description: Successful response.
@@ -1003,12 +1003,12 @@ paths:
       summary: Delete a TrainingPlan
       description: Deletes an existing `TrainingPlan`.
     parameters:
-    - name: trainingplanId
-      description: A unique identifier for a `TrainingPlan`.
-      schema:
-        type: string
-      in: path
-      required: true
+      - name: trainingplanId
+        description: A unique identifier for a `TrainingPlan`.
+        schema:
+          type: string
+        in: path
+        required: true
   /trainingplans:
     summary: Path used to manage the list of trainingplans.
     description: "The REST endpoint/path used to list and create zero or more `TrainingPlan`\
@@ -1016,7 +1016,7 @@ paths:
       \ list and create tasks, respectively."
     get:
       tags:
-      - TrainingPlan
+        - TrainingPlan
       responses:
         "200":
           content:
@@ -1040,7 +1040,7 @@ paths:
               $ref: '#/components/schemas/TrainingPlan'
         required: true
       tags:
-      - TrainingPlan
+        - TrainingPlan
       responses:
         "201":
           description: Successful response.
@@ -1049,13 +1049,97 @@ paths:
       operationId: createTrainingPlan
       summary: Create a TrainingPlan
       description: Creates a new instance of a `TrainingPlan`.
+  /postcomments:
+    summary: Path used to manage the list of postcomments.
+    description: "The REST endpoint/path used to list and create zero or more `PostComment`\
+        \ entities.  This path contains a `GET` and `POST` operation to perform the\
+        \ list and create tasks, respectively."
+    get:
+      tags:
+        - PostComment
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PostComment'
+          description: Successful response - returns an array of `PostComment` entities.
+      operationId: getPostComments
+      summary: List All PostComments
+      description: Gets a list of all `PostComment` entities.
+    post:
+      tags:
+        - PostComment
+      requestBody:
+        description: A new `PostComment` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostComment'
+        required: true
+      responses:
+        "201":
+          description: Successful response.
+      operationId: createPostComment
+      summary: Create a PostComment
+      description: Creates a new instance of a `PostComment`.
+  /postcomments/{postcommentId}:
+    summary: Path used to manage a single PostComment.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `PostComment`.  This path contains `GET`, `PUT`, and `DELETE` operations\
+      \ used to perform the get, update, and delete tasks, respectively."
+    get:
+      tags:
+        - PostComment
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostComment'
+          description: Successful response - returns a single `PostComment`.
+      operationId: getPostComment
+      summary: Get a PostComment
+      description: Gets the details of a single instance of a `PostComment`.
+    put:
+      tags:
+        - PostComment
+      requestBody:
+        description: Updated `PostComment` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostComment'
+        required: true
+      responses:
+        "202":
+          description: Successful response.
+      operationId: updatePostComment
+      summary: Update a PostComment
+      description: Updates an existing `PostComment`.
+    delete:
+      responses:
+        "204":
+          description: Successful response.
+      operationId: deletePostComment
+      summary: Delete a PostComment
+      description: Deletes an existing `PostComment`.
+    parameters:
+      - name: postcommentId
+        description: A unique identifier for a `PostComment`.
+        schema:
+          type: string
+        in: path
+        required: true
 components:
   schemas:
     Event:
       title: Root Type for Event
       description: ""
       required:
-      - id
+        - id
       type: object
       properties:
         id:
@@ -1080,11 +1164,11 @@ components:
       title: Root Type for User
       description: ""
       required:
-      - email
-      - firstName
-      - id
-      - lastName
-      - registeredAt
+        - email
+        - firstName
+        - id
+        - lastName
+        - registeredAt
       type: object
       properties:
         id:
@@ -1118,9 +1202,9 @@ components:
       title: Root Type for Group
       description: ""
       required:
-      - createdBy
-      - id
-      - title
+        - createdBy
+        - id
+        - title
       type: object
       properties:
         id:
@@ -1148,10 +1232,10 @@ components:
       title: Root Type for GroupMember
       description: ""
       required:
-      - int
-      - roleId
-      - status
-      - groupId
+        - int
+        - roleId
+        - status
+        - groupId
       type: object
       properties:
         int:
@@ -1171,12 +1255,12 @@ components:
       title: Root Type for GroupMessage
       description: '    '
       required:
-      - id
-      - message
-      - userId
-      - updatedAt
-      - createdAt
-      - groupId
+        - id
+        - message
+        - userId
+        - updatedAt
+        - createdAt
+        - groupId
       type: object
       properties:
         id:
@@ -1202,12 +1286,12 @@ components:
       title: Root Type for GroupPost
       description: ""
       required:
-      - createdAt
-      - groupMemberGroupId
-      - groupMemberId
-      - id
-      - message
-      - title
+        - createdAt
+        - groupMemberGroupId
+        - groupMemberId
+        - id
+        - message
+        - title
       type: object
       properties:
         id:
@@ -1242,10 +1326,10 @@ components:
       title: Root Type for UserMessage
       description: '    '
       required:
-      - createdAt
-      - id
-      - message
-      - userId
+        - createdAt
+        - id
+        - message
+        - userId
       type: object
       properties:
         id:
@@ -1274,9 +1358,9 @@ components:
       title: Root Type for UserFriend
       description: ""
       required:
-      - createdAt
-      - id
-      - userId
+        - createdAt
+        - id
+        - userId
       type: object
       properties:
         id:
@@ -1297,9 +1381,9 @@ components:
       title: Root Type for UserFriend
       description: ""
       required:
-      - createdAt
-      - id
-      - userId
+        - createdAt
+        - id
+        - userId
       type: object
       properties:
         id:
@@ -1333,10 +1417,10 @@ components:
       title: Root Type for TrainingPlan
       description: ""
       required:
-      - createdBy
-      - description
-      - id
-      - type
+        - createdBy
+        - description
+        - id
+        - type
       type: object
       properties:
         id:
@@ -1355,10 +1439,10 @@ components:
     RestUserPost:
       description: The user post returned to client app.
       required:
-      - id
-      - createdAt
-      - userId
-      - image
+        - id
+        - createdAt
+        - userId
+        - image
       type: object
       properties:
         id:
@@ -1382,28 +1466,43 @@ components:
           format: byte
           description: ""
           type: string
+    PostComment:
+      description: ""
+      required:
+        - postId
+        - text
+      type: object
+      properties:
+        postId:
+          description: ""
+          type: integer
+        text:
+          description: ""
+          type: string
 tags:
-- name: User
-  description: ""
-- name: Event
-  description: ""
-- name: Group
-  description: ""
-- name: GroupPost
-  description: ""
-- name: UserPost
-  description: ""
-- name: TrainingPlan
-  description: ""
-- name: UserFollower
-  description: ""
-- name: UserFriend
-  description: ""
-- name: UserMessage
-  description: ""
-- name: GroupMessage
-  description: ""
-- name: GroupMember
-  description: ""
-- name: RestUserPost
-  description: ""
+  - name: User
+    description: ""
+  - name: Event
+    description: ""
+  - name: Group
+    description: ""
+  - name: GroupPost
+    description: ""
+  - name: UserPost
+    description: ""
+  - name: TrainingPlan
+    description: ""
+  - name: UserFollower
+    description: ""
+  - name: UserFriend
+    description: ""
+  - name: UserMessage
+    description: ""
+  - name: GroupMessage
+    description: ""
+  - name: GroupMember
+    description: ""
+  - name: RestUserPost
+    description: ""
+  - name: PostComment
+    description: ""
