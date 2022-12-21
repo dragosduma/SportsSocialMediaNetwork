@@ -1441,7 +1441,7 @@ components:
       required:
         - id
         - createdAt
-        - userId
+        - userEmail
         - image
       type: object
       properties:
@@ -1459,9 +1459,9 @@ components:
           format: date-time
           description: ""
           type: string
-        userId:
+        userEmail:
           description: ""
-          type: integer
+          type: string
         image:
           format: byte
           description: ""

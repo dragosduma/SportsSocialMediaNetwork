@@ -33,7 +33,7 @@ export default function Post({ img, userImg, caption, username, id }) {
         <div className='bg-white my-7 border rounded-md'>
             {/*post header*/}
             <div className="flex items-center p-5">
-                <img className='h-12 rounded-full object-cover border p-1 mr-3' src={userImg} alt={username} />
+                {/* <img className='h-12 rounded-full object-cover border p-1 mr-3' src={userImg} /> */}
                 <p className='font-bold flex-1'>{username}</p>
                 <DotsHorizontalIcon className='h-5' />
             </div>
@@ -50,7 +50,7 @@ export default function Post({ img, userImg, caption, username, id }) {
             </div>
 
             {/*post comments */}
-            <p className='p-5 truncate'><span className='font-bold mr-2'>{username}</span>{caption}</p>
+            <p className='p-5 truncate'><span className='font-bold mr-2'></span>{caption}</p>
 
             {/*post input box */}
             <form className="flex item-center p-4">

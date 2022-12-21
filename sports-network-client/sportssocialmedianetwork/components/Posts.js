@@ -26,7 +26,7 @@ export default function Posts() {
                 <Post
                     key={posts.id}
                     id={posts.id}
-                    username={posts.username}
+                    username={posts.userEmail}
                     img={posts.image}
                     caption={posts.caption}
                 />
