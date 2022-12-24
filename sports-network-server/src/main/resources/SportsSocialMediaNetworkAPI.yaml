@@ -1056,7 +1056,14 @@ paths:
         \ list and create tasks, respectively."
     get:
       tags:
-        - PostComment
+      - PostComment
+      parameters:
+      - name: postId
+        description: ""
+        schema:
+          type: integer
+        in: query
+        required: true
       responses:
         "200":
           content:
@@ -1064,7 +1071,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PostComment'
+                  $ref: '#/components/schemas/RestPostComment'
           description: Successful response - returns an array of `PostComment` entities.
       operationId: getPostComments
       summary: List All PostComments
@@ -1098,7 +1105,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PostComment'
+                $ref: '#/components/schemas/RestPostComment'
           description: Successful response - returns a single `PostComment`.
       operationId: getPostComment
       summary: Get a PostComment
@@ -1479,6 +1486,32 @@ components:
         text:
           description: ""
           type: string
+    RestPostComment:
+      description: ""
+      required:
+        - id
+        - text
+        - userId
+        - postId
+        - createdAt
+      type: object
+      properties:
+        id:
+          description: ""
+          type: integer
+        text:
+          description: ""
+          type: string
+        userEmail:
+          description: ""
+          type: string
+        postId:
+          description: ""
+          type: integer
+        createdAt:
+          format: date-time
+          description: ""
+          type: string
 tags:
   - name: User
     description: ""
@@ -1505,4 +1538,6 @@ tags:
   - name: RestUserPost
     description: ""
   - name: PostComment
+    description: ""
+  - name: RestPostComment
     description: ""

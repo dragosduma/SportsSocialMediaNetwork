@@ -29,14 +29,4 @@ public class PostCommentDb {
 
     @Column(name="created_at")
     private LocalDateTime createdAt;
-
-    public static PostCommentDb mapToDbPostComment(PostComment postComment, int userId) {
-        PostCommentDb p = new PostCommentDb();
-        p.postId = postComment.getPostId();
-        p.text = postComment.getText();
-        p.postedBy = userId;
-        p.createdAt = LocalDateTime.now();
-        return p;
-    }
-
 }

@@ -8,7 +8,6 @@ export default function Posts() {
         postService.getAllPosts().then(
             (response) => {
                 setPosts(response.data);
-                console.log(response.data);
             },
             (error) => {
                 console.log("Private info", error.response);
@@ -20,9 +19,11 @@ export default function Posts() {
         )
     }, []);
 
+    const orderDescending = [...posts].sort((a, b) => b.id - a.id)
+
     return (
         <div>
-            {posts.map(posts => (
+            {orderDescending.map(posts => (
                 <Post
                     key={posts.id}
                     id={posts.id}

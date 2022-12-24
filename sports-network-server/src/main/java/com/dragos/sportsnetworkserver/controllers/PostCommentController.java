@@ -2,13 +2,14 @@ package com.dragos.sportsnetworkserver.controllers;
 
 import com.dragos.sportsnetworkserver.api.PostCommentApi;
 import com.dragos.sportsnetworkserver.model.PostComment;
+import com.dragos.sportsnetworkserver.model.RestPostComment;
 import com.dragos.sportsnetworkserver.service.PostCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin
@@ -27,13 +28,14 @@ public class PostCommentController implements PostCommentApi {
     }
 
     @Override
-    public ResponseEntity<PostComment> getPostComment(String postCommentId) {
+    public ResponseEntity<RestPostComment> getPostComment(String postCommentId) {
         return null;
     }
 
     @Override
-    public ResponseEntity<List<PostComment>> getPostComments() {
-        return null;
+    public ResponseEntity<Set<RestPostComment>> getPostComments(Integer postId) {
+        Set<RestPostComment> comments = postCommentService.getCommentsByPostId(postId);
+        return ResponseEntity.ok(comments);
     }
 
     @Override
