@@ -21,7 +21,7 @@ export default function Post({ img, userImg, caption, username, id }) {
             }).then(response => {
                 setComments(response.data)
             })
-    }, [comments])
+    }, [])
 
     function updateComment(value) {
         const commentCopy = { ...comment }

@@ -24,20 +24,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
+        http.cors()
+                .and()
                 .authorizeRequests()
                 .antMatchers("/auth/*",
                         "/users",
                         "/v3/api-docs/**",
                         "/swagger-ui/**",
-                        "/swagger-ui.html")
+                        "/swagger-ui.html",
+                        "/ws/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .csrf()
+                .disable();
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
