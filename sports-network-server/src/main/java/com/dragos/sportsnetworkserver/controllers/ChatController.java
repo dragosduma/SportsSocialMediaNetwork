@@ -1,6 +1,6 @@
 package com.dragos.sportsnetworkserver.controllers;
 
-import com.dragos.sportsnetworkserver.model.Message;
+import com.dragos.sportsnetworkserver.model.ChatMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -18,14 +18,14 @@ public class ChatController {
 
     @MessageMapping("/message")
     @SendTo("/chatroom/public")
-    public Message receiveMessage(@Payload Message message){
-        return message;
+    public ChatMessage receiveMessage(@Payload ChatMessage chatMessage){
+        return chatMessage;
     }
 
     @MessageMapping("/private-message")
-    public Message recMessage(@Payload Message message){
-        simpMessagingTemplate.convertAndSendToUser(message.getReceiverName(),"/private",message);
-        System.out.println(message.toString());
-        return message;
+    public ChatMessage recMessage(@Payload ChatMessage chatMessage){
+        simpMessagingTemplate.convertAndSendToUser(chatMessage.getReceiverName(),"/private", chatMessage);
+        System.out.println(chatMessage.toString());
+        return chatMessage;
     }
 }

@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Message {
+public class ChatMessage {
     private String senderName;
     private String receiverName;
     private String message;
