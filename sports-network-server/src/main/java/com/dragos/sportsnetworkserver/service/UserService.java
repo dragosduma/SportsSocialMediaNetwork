@@ -1,5 +1,6 @@
 package com.dragos.sportsnetworkserver.service;
 
+import com.dragos.sportsnetworkserver.exception.EmailAlreadyExistsException;
 import com.dragos.sportsnetworkserver.model.User;
 import com.dragos.sportsnetworkserver.model.UserDb;
 import com.dragos.sportsnetworkserver.repository.UserRepository;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,6 +19,7 @@ import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -24,9 +27,15 @@ public class UserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    public UserDb saveUser(User user) {
-        UserDb userDb = UserDb.mapToDbUser(user);
-        return userRepository.save(userDb);
+    public UserDb saveUser(User user) throws EmailAlreadyExistsException {
+        UserDb userDb = userRepository
+                .findByEmail(user.getEmail())
+                .orElse(null);
+        if(userDb == null) {
+            userDb = mapToDbUser(user);
+            return userRepository.save(userDb);
+        } else
+            throw new EmailAlreadyExistsException("Email already exists");
     }
 
     public List<User> findAll() {
@@ -75,7 +84,20 @@ public class UserService implements UserDetailsService {
         User user = userDb.get().mapToRestUser();
         if(userDb == null)
             throw new UsernameNotFoundException(username);
-        return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPasswordHash(),new ArrayList<>());
+        return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),new ArrayList<>());
     }
+
+    public static UserDb mapToDbUser(User user) {
+        UserDb u = new UserDb();
+        u.setFirstName(user.getFirstName());
+        u.setLastName(user.getLastName());
+        u.setEmail(user.getEmail());
+        u.setPasswordHash(user.getPassword());
+        u.setPhoneNumber(user.getPhoneNumber());
+        u.setRegisteredAt(LocalDateTime.now());
+        u.setUserImage(user.getUserImage());
+        return u;
+    }
+
 }
 

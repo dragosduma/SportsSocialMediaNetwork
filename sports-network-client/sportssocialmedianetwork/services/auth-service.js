@@ -3,20 +3,6 @@ import Router from "next/router";
 
 const API_URL = "/auth"
 
-const signup = (username, password) => {
-    return axios
-        .post(API_URL + "/signup", {
-            username,
-            password,
-        })
-        .then((response) => {
-            if (response.data.jwtToken) {
-                localStorage.setItem("user", JSON.stringify(response.data));
-            }
-            return response.data;
-        });
-};
-
 const login = (username, password) => {
     return axios
         .post(API_URL + "/login", {
@@ -41,7 +27,6 @@ const getCurrentUser = () => {
 };
 
 const authService = {
-    signup,
     login,
     logout,
     getCurrentUser

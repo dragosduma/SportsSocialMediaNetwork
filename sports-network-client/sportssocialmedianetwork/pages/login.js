@@ -1,5 +1,5 @@
 import NextLink from "next/link";
-import { FaLock, FaUser } from 'react-icons/fa';
+import { FaLock, FaUser, FaMailBulk } from 'react-icons/fa';
 import Router from 'next/router';
 import { useState } from "react";
 import authService from "../services/auth-service";
@@ -41,7 +41,7 @@ export default function Login() {
 
             <form onSubmit={handleLogin} className='flex flex-col items-center space-y-4'>
               <div className='relative'>
-                <span className='absolute flex inset-y-0 items-center pl-4 text-gray-400'><FaUser /></span>
+                <span className='absolute flex inset-y-0 items-center pl-4 text-gray-400'><FaMailBulk /></span>
                 <input
                   className='border border-gray-300 outline-none placeholder-gray-400 pl-9 pr-4 py-1 rounded-md transition focus:ring-2 focus:ring-cyan-300'
                   placeholder="Email..."
@@ -73,7 +73,7 @@ export default function Login() {
               <p className='italic'>
                 Join us now.
                 <NextLink
-                  href="/"
+                  href="/register"
                   legacyBehavior
                 >
                   <a className="ml-1 text-cyan-500 hover:underline">Register here</a>

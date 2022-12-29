@@ -1176,6 +1176,7 @@ components:
         - id
         - lastName
         - registeredAt
+        - password
       type: object
       properties:
         id:
@@ -1186,7 +1187,7 @@ components:
           type: string
         phoneNumber:
           type: string
-        passwordHash:
+        password:
           type: string
         registeredAt:
           format: date-time
@@ -1201,7 +1202,7 @@ components:
         firstName: First name
         lastName: Last name
         phoneNumber: "0123456789"
-        passwordHast: qi8H8R7OM4xMUNMPuRAZxlY
+        password: pass1234
         registeredAt: 2020-07-21T12:12:23.000+0200
         email: email@example.com
         userImage: iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAA
