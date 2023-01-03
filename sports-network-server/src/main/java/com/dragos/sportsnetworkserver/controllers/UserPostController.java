@@ -48,6 +48,7 @@ public class UserPostController implements UserPostApi {
 
     @Override
     public ResponseEntity<Void> updateUserPost(String userpostId, UserPost userPost) {
-        return null;
+        userPostService.updateUserPost(Integer.parseInt(userpostId), userPost);
+        return ResponseEntity.ok().build();
     }
 }

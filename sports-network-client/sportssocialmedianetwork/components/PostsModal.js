@@ -33,6 +33,17 @@ export default function PostsModal({ postId }) {
 
     const handleUpload = async (event) => {
         event.preventDefault();
+        return axios
+            .put(`userposts/${postId}`,
+                {
+                 caption: caption   
+                },
+                {
+                    headers: authHeader()
+                }).then(response => {
+                    console.log(response)
+                    setOpenUpdate(false);
+                })
     }
 
     return (

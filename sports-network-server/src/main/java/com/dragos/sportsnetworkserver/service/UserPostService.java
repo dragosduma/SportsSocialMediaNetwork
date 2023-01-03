@@ -1,6 +1,8 @@
 package com.dragos.sportsnetworkserver.service;
 
 import com.dragos.sportsnetworkserver.model.RestUserPost;
+import com.dragos.sportsnetworkserver.model.User;
+import com.dragos.sportsnetworkserver.model.UserPost;
 import com.dragos.sportsnetworkserver.model.UserPostDb;
 import com.dragos.sportsnetworkserver.repository.UserPostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,17 @@ public class UserPostService {
 
     public void deleteUserPostById(int id) {
         userPostRepository.deleteById(id);
+    }
+
+    public UserPostDb updateUserPost(int id, UserPost userPost) {
+        if(userPostRepository.findById(id).isPresent()) {
+            UserPostDb existingPost = userPostRepository.findById(id).get();
+            existingPost.setCaption(userPost.getCaption());
+            existingPost.setUpdatedAt(LocalDateTime.now());
+            return userPostRepository.save(existingPost);
+        } else {
+            return null;
+        }
     }
 
     public static UserPostDb mapToDbUserPost(MultipartFile file, String caption, int id) throws IOException {
