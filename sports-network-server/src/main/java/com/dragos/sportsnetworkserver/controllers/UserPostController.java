@@ -31,12 +31,13 @@ public class UserPostController implements UserPostApi {
 
 
     @Override
-    public ResponseEntity<Void> deleteUserPost(String userPostId) {
-        return null;
+    public ResponseEntity<Void> deleteUserPost(String userpostId) {
+        userPostService.deleteUserPostById(Integer.parseInt((userpostId)));
+        return ResponseEntity.ok().build();
     }
 
     @Override
-    public ResponseEntity<RestUserPost> getUserPost(String userPostId) {
+    public ResponseEntity<RestUserPost> getUserPost(String userpostId) {
         return null;
     }
 
@@ -46,7 +47,7 @@ public class UserPostController implements UserPostApi {
     }
 
     @Override
-    public ResponseEntity<Void> updateUserPost(String userPostId, UserPost userPost) {
+    public ResponseEntity<Void> updateUserPost(String userpostId, UserPost userPost) {
         return null;
     }
 }

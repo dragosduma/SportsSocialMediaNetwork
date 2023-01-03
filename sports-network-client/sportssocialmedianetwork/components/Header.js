@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { modalState } from "../atom/modalAtom";
 
 export default function Header() {
+    
     const [open, setOpen] = useRecoilState(modalState);
 
     return (

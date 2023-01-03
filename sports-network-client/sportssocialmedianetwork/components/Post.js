@@ -1,12 +1,18 @@
 import { DotsHorizontalIcon, HeartIcon, ChatIcon, BookmarkIcon, EmojiHappyIcon } from '@heroicons/react/outline';
 import { useEffect, useState } from 'react';
+import { useRecoilState } from "recoil";
 import { Button } from "react-bootstrap"
 import authHeader from '../services/auth-header';
 import axios from "axios";
 import Moment from 'react-moment';
 import 'moment-timezone';
+import PostsModal from './PostsModal';
+import { postModalState } from "../atom/postModalAtom";
 
 export default function Post({ img, userImg, caption, username, id }) {
+
+    const [open, setOpen] = useRecoilState(postModalState);
+
     const [comment, setComment] = useState({
         text: "",
         postId: id,
@@ -42,14 +48,16 @@ export default function Post({ img, userImg, caption, username, id }) {
 
     const numDescending = [...comments].sort((a, b) => a.id - b.id);
 
-
     return (
         <div className='bg-white my-7 border rounded-md'>
             {/*post header*/}
             <div className="flex items-center p-5">
                 {/* <img className='h-12 rounded-full object-cover border p-1 mr-3' src={userImg} /> */}
                 <p className='font-bold flex-1'>{username.split("@")[0]}</p>
-                <DotsHorizontalIcon className='h-5' />
+                <DotsHorizontalIcon
+                    className='btn'
+                    onClick={() => setOpen(true)}
+                />
             </div>
 
             {/*post image */}
@@ -98,6 +106,7 @@ export default function Post({ img, userImg, caption, username, id }) {
                     Post
                 </Button>
             </form>
+            <PostsModal postId={id}></PostsModal>
         </div>
     );
 }
