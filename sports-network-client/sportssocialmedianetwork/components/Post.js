@@ -8,10 +8,14 @@ import Moment from 'react-moment';
 import 'moment-timezone';
 import PostsModal from './PostsModal';
 import { postModalState } from "../atom/postModalAtom";
+import authService from '../services/auth-service';
+import jwtDecode from 'jwt-decode';
 
 export default function Post({ img, userImg, caption, username, id }) {
 
     const [open, setOpen] = useRecoilState(postModalState);
+
+    const [currentUser, setCurrentUser] = useState(undefined);
 
     const [comment, setComment] = useState({
         text: "",
@@ -20,7 +24,19 @@ export default function Post({ img, userImg, caption, username, id }) {
 
     const [comments, setComments] = useState([])
 
+    const [decode, setDecode] = useState("")
+
+    const [sameUser, setSameUser] = useState(true)
+
+    const numDescending = [...comments].sort((a, b) => a.id - b.id);
+
     useEffect(() => {
+        const user = authService.getCurrentUser();
+
+        if(user) {
+            setCurrentUser(user)
+        }
+
         axios.get(`/postcomments?postId=${id}`,
             {
                 headers: authHeader()
@@ -46,7 +62,14 @@ export default function Post({ img, userImg, caption, username, id }) {
                 })
     }
 
-    const numDescending = [...comments].sort((a, b) => a.id - b.id);
+    if (currentUser && decode === "")
+    {
+        setDecode(jwtDecode(currentUser.jwtToken))
+    }
+
+    if(decode && sameUser)
+        if(decode.sub !== username)
+            setSameUser(false)
 
     return (
         <div className='bg-white my-7 border rounded-md'>
@@ -54,14 +77,15 @@ export default function Post({ img, userImg, caption, username, id }) {
             <div className="flex items-center p-5">
                 {/* <img className='h-12 rounded-full object-cover border p-1 mr-3' src={userImg} /> */}
                 <p className='font-bold flex-1'>{username.split("@")[0]}</p>
-                <DotsHorizontalIcon
+                {sameUser && <DotsHorizontalIcon
                     className='btn'
                     onClick={() => setOpen(true)}
-                />
+                />}
             </div>
 
             {/*post image */}
             <img className="object-cover w-full" src={`data:image/jpeg;base64,${img}`} alt="" />
+            
             {/*post buttons */}
             <div className="flex justify-between px-4 pt-4">
                 <div className="flex space-x-4">
@@ -76,6 +100,7 @@ export default function Post({ img, userImg, caption, username, id }) {
                 <span className='font-bold mr-2'></span>
                 {caption}
             </p>
+            
             {/* <Comments/> */}
             {comments.length > 0 && (
                 <div className="mx-10 max-h-24 overflow-y-scroll scrollbar-none">

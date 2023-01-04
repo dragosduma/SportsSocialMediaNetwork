@@ -78,6 +78,11 @@ public class UserService implements UserDetailsService {
         return userDetails.getUsername();
     }
 
+    public String getUsernameFromId(int id) {
+        UserDb userDb = mapToDbUser(findById(id));
+        return userDb.getEmail();
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) {
         Optional<UserDb> userDb = userRepository.findByEmail(username);
