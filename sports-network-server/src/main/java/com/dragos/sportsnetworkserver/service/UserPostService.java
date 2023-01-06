@@ -79,7 +79,7 @@ public class UserPostService {
                 .id(userPostDb.getId())
                 .createdAt(userPostDb.getCreatedAt().atOffset(ZoneOffset.UTC))
                 .updatedAt(userPostDb.getUpdatedAt().atOffset(ZoneOffset.UTC))
-                .userEmail(userService.getUsernameFromId(userPostDb.getId()))
+                .userEmail(userService.getUsernameFromId(userPostDb.getUserId()))
                 .build();
     }
 

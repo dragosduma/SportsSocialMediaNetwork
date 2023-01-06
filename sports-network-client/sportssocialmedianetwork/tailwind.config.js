@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        socialBg:'#F5F7FB',
+        socialBlue:'#218DFA'
+      },
       backgroundImage: theme => ({
         'image': "url('/login-photo.png')"
       })

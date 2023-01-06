@@ -1,5 +1,9 @@
-import '../styles/globals.css'
-import { RecoilRoot } from 'recoil'
+import "../styles/globals.css";
+import { RecoilRoot } from "recoil";
+import TimeAgo from "javascript-time-ago";
+
+import en from "javascript-time-ago/locale/en.json";
+TimeAgo.addDefaultLocale(en);
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -9,4 +13,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp
+export default MyApp;

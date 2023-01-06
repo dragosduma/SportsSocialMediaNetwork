@@ -43,7 +43,6 @@ public class PostCommentService {
         return allPostComments;
     }
 
-
     public PostCommentDb savePostComment(PostComment postComment) {
         String userEmail = userService.getUsernameFromUserDetails();
         int userId = userService.getUserIdFromEmail(userEmail);
@@ -60,16 +59,16 @@ public class PostCommentService {
         return p;
     }
 
-
     public RestPostComment mapToRestPostComment(PostCommentDb postCommentDb) {
         return RestPostComment
                 .builder()
                 .id(postCommentDb.getId())
                 .postId(postCommentDb.getPostId())
-                .userEmail(userService.getUsernameFromUserDetails())
+                .userEmail(userService.getUsernameFromId(postCommentDb.getPostedBy()))
                 .text(postCommentDb.getText())
                 .createdAt(postCommentDb.getCreatedAt().atOffset(ZoneOffset.UTC))
                 .build();
 
     }
+
 }
