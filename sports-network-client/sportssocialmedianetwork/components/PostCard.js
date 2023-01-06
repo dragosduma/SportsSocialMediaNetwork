@@ -234,8 +234,8 @@ export default function PostCard({
       </div>
       <div>
         <p className="my-3 text-sm">{caption}</p>
-        <div className="rounded-md overflow-hidden">
-          <img src={`data:image/jpeg;base64,${img}`} alt="" />
+        <div className="flex rounded-md overflow-hidden justify-center">
+          <img className="" src={`data:image/jpeg;base64,${img}`} alt="" />
         </div>
       </div>
       <div className="mt-5 flex gap-8">
@@ -312,9 +312,9 @@ export default function PostCard({
           </form>
         </div>
       </div>
-      <div className="h-32 overflow-hidden hover:overflow-y-scroll">
-        {comments.length > 0 &&
-          numDescending.map((comment) => (
+      {comments.length > 0 &&
+        numDescending.map((comment) => (
+          <div key={comment.id} className="h-22 overflow-hidden hover:overflow-y-scroll">
             <div key={comment.id} className="mt-2 flex gap-2 items-center">
               <Avatar />
               <div className="bg-gray-200 py-2 px-4 rounded-3xl">
@@ -335,8 +335,8 @@ export default function PostCard({
                 <p className="text-sm">{comment.text}</p>
               </div>
             </div>
-          ))}
-      </div>
+          </div>
+        ))}
     </Card>
   );
 }

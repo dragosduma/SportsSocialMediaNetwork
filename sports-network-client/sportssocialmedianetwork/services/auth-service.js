@@ -19,7 +19,7 @@ const login = (username, password) => {
 
 const logout = () => {
   localStorage.removeItem("user");
-  Router.push("login");
+  Router.push("/login");
 };
 
 const getCurrentUser = () => {

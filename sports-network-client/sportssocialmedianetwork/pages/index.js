@@ -6,8 +6,10 @@ import { useState, useEffect } from "react";
 import authService from "../services/auth-service";
 import postService from "../services/post-service";
 import UploadModal from "../components/UploadModal";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+
   const [currentUser, setCurrentUser] = useState(undefined);
 
   useEffect(() => {
@@ -32,11 +34,8 @@ export default function Home() {
         setPosts(response.data);
       },
       (error) => {
-        console.log("Private info", error.response);
-        if (error.response && error.response.data === 403) {
-          authService.logout();
-          Router.push("login");
-        }
+        console.log(error)
+        authService.logout();
       }
     );
   }

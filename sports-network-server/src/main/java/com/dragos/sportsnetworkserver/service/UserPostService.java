@@ -1,7 +1,6 @@
 package com.dragos.sportsnetworkserver.service;
 
 import com.dragos.sportsnetworkserver.model.RestUserPost;
-import com.dragos.sportsnetworkserver.model.User;
 import com.dragos.sportsnetworkserver.model.UserPost;
 import com.dragos.sportsnetworkserver.model.UserPostDb;
 import com.dragos.sportsnetworkserver.repository.UserPostRepository;

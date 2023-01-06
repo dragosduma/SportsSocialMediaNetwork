@@ -21,11 +21,11 @@ public class PostCommentDb {
 
     private String text;
 
+    @Column(name="user_id")
+    private int postedBy;
+
     @Column(name="user_post_id")
     private int postId;
-
-    @Column(name="user_post_user_id")
-    private int postedBy;
 
     @Column(name="created_at")
     private LocalDateTime createdAt;
