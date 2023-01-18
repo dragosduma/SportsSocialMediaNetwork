@@ -312,31 +312,35 @@ export default function PostCard({
           </form>
         </div>
       </div>
-      {comments.length > 0 &&
-        numDescending.map((comment) => (
-          <div key={comment.id} className="h-22 overflow-hidden hover:overflow-y-scroll">
-            <div key={comment.id} className="mt-2 flex gap-2 items-center">
-              <Avatar />
-              <div className="bg-gray-200 py-2 px-4 rounded-3xl">
-                <div>
-                  <Link href={"/profile/" + comment.userEmail.split("@")[0]}>
-                    <span className="hover:underline font-semibold mr-1">
-                      {comment.userEmail.split("@")[0]}
+      <div className={comments.length > 0 ? "h-32 overflow-hidden hover:overflow-y-scroll" : "h-0"}>
+
+        {comments.length > 0 &&
+          numDescending.map((comment) => (
+            <div key={comment.id}>
+              <div key={comment.id} className="mt-2 flex gap-2 items-center">
+                <Avatar />
+                <div className="bg-gray-200 py-2 px-4 rounded-3xl">
+                  <div>
+                    <Link href={"/profile/" + comment.userEmail.split("@")[0]}>
+                      <span className="hover:underline font-semibold mr-1">
+                        {comment.userEmail.split("@")[0]}
+                      </span>
+                    </Link>
+                    <span className="text-sm text-gray-500">
+                      {" "}
+                      <ReactTimeAgo
+                        timeStyle={"twitter"}
+                        date={new Date(comment.createdAt).getTime()}
+                      ></ReactTimeAgo>
                     </span>
-                  </Link>
-                  <span className="text-sm text-gray-500">
-                    {" "}
-                    <ReactTimeAgo
-                      timeStyle={"twitter"}
-                      date={new Date(comment.createdAt).getTime()}
-                    ></ReactTimeAgo>
-                  </span>
+                  </div>
+                  <p className="text-sm">{comment.text}</p>
                 </div>
-                <p className="text-sm">{comment.text}</p>
               </div>
             </div>
-          </div>
-        ))}
-    </Card>
+          ))}
+      </div>
+
+    </Card >
   );
 }

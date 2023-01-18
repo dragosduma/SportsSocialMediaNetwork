@@ -1,12 +1,10 @@
 import Layout from "../components/Layout";
-import NavigationCard from "../components/NavigationCard";
 import PostCard from "../components/PostCard";
 import PostFormCard from "../components/PostFormCard";
 import { useState, useEffect } from "react";
 import authService from "../services/auth-service";
 import postService from "../services/post-service";
 import UploadModal from "../components/UploadModal";
-import { useNavigate } from "react-router-dom";
 
 export default function Home() {
 
