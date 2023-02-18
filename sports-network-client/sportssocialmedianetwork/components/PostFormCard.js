@@ -25,7 +25,7 @@ export default function PostFormCard({ user, onPost }) {
         )}
       </div>
       <div className="flex gap-5 items-center mt-2">
-        <div>
+        {/* <div>
           <button className="flex gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@ export default function PostFormCard({ user, onPost }) {
             </svg>
             <span className="hidden md:block">Mood</span>
           </button>
-        </div>
+        </div> */}
         <div className="grow text-right">
           <button
             onClick={() => setOpen(true)}

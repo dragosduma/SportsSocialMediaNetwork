@@ -41,7 +41,6 @@ export default function PostsModal({ postId }) {
                 {
                     headers: authHeader()
                 }).then(response => {
-                    console.log(response)
                     setOpenUpdate(false);
                 })
     }

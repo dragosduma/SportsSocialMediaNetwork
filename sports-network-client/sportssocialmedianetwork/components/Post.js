@@ -63,7 +63,6 @@ export default function Post({ img, userImg, caption, username, id }) {
         headers: authHeader(),
       })
       .then((response) => {
-        console.log(response);
       });
   }
 

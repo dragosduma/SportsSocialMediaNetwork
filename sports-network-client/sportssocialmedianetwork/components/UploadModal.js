@@ -48,7 +48,6 @@ export default function UploadModal({ onPost }) {
         },
       })
       .then((response) => {
-        console.log(response.data);
         setOpen(false);
         if (onPost) {
           onPost();
