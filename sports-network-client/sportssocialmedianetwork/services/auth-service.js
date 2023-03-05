@@ -1,5 +1,7 @@
 import axios from "axios";
 import Router from "next/router";
+import { auth } from "../firebase";
+import { signOut } from "firebase/auth";
 
 const API_URL = "/auth";
 
@@ -19,6 +21,11 @@ const login = (username, password) => {
 
 const logout = () => {
   localStorage.removeItem("user");
+  signOut(auth).then(() => {
+
+  }).catch((error) => {
+    console.log(error);
+  });
   Router.push("/login");
 };
 

@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/style.scss"
 import { RecoilRoot } from "recoil";
 import TimeAgo from "javascript-time-ago";
 

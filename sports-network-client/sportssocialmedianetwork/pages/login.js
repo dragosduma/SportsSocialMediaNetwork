@@ -3,13 +3,27 @@ import { FaLock, FaUser, FaMailBulk } from "react-icons/fa";
 import Router from "next/router";
 import { useState } from "react";
 import authService from "../services/auth-service";
+import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const handleFirebaseLogin = async (event) => {
+    signInWithEmailAndPassword(auth, username, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      })
+  }
+
   const handleLogin = async (event) => {
     event.preventDefault();
+    handleFirebaseLogin()
     try {
       await authService.login(username, password).then(
         () => {

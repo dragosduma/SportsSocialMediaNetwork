@@ -16,6 +16,9 @@ export default function Home() {
     if (user) {
       setCurrentUser(user);
     }
+    else {
+      authService.logout();
+    }
   }, []);
 
   const [posts, setPosts] = useState([]);
@@ -33,7 +36,6 @@ export default function Home() {
       },
       (error) => {
         console.log(error)
-        authService.logout();
       }
     );
   }

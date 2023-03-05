@@ -4,6 +4,14 @@ import com.dragos.sportsnetworkserver.exception.EmailAlreadyExistsException;
 import com.dragos.sportsnetworkserver.model.User;
 import com.dragos.sportsnetworkserver.model.UserDb;
 import com.dragos.sportsnetworkserver.repository.UserRepository;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.SetOptions;
+import com.google.cloud.firestore.WriteResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.UserRecord;
+import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,10 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -23,16 +28,19 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    Firestore db = FirestoreClient.getFirestore();
+
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public UserDb saveUser(User user) throws EmailAlreadyExistsException {
+    public UserDb saveUser(User user) throws EmailAlreadyExistsException, FirebaseAuthException {
         UserDb userDb = userRepository
                 .findByEmail(user.getEmail())
                 .orElse(null);
         if(userDb == null) {
             userDb = mapToDbUser(user);
+            createFirebaseUser(user);
             return userRepository.save(userDb);
         } else
             throw new EmailAlreadyExistsException("Email already exists");
@@ -104,5 +112,31 @@ public class UserService implements UserDetailsService {
         return u;
     }
 
+    public void createFirebaseUser(User user) throws FirebaseAuthException {
+        UserRecord.CreateRequest request = new UserRecord.CreateRequest()
+                .setEmail(user.getEmail())
+                .setPassword(user.getPassword())
+                .setDisplayName(user.getFirstName() + " " + user.getLastName())
+                .setDisabled(false);
+
+        UserRecord userRecord = FirebaseAuth.getInstance().createUser(request);
+        updateUserCollection(user, userRecord.getUid());
+        createUserChatCollection(userRecord.getUid());
+        System.out.println("Successfully created new user: " + userRecord.getUid());
+    }
+
+    public void updateUserCollection(User user, String uid) {
+        Map<String,Object> docData = new HashMap<>();
+        docData.put("displayName", user.getFirstName()+" "+user.getLastName());
+        docData.put("email", user.getEmail());
+        docData.put("uid", uid);
+
+        ApiFuture<WriteResult> writeResult = db.collection("users").document(uid).set(docData, SetOptions.merge());
+    }
+
+    public void createUserChatCollection(String uid) {
+        Map<String, Object> docData = new HashMap<>();
+        ApiFuture<WriteResult> writeResult = db.collection("userChats").document(uid).set(docData);
+    }
 }
 

@@ -9,3 +9,5 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
+sports-network-server/react-chat-app-adminsdk.json
+sports-network-client/sportssocialmedianetwork/firebase.js

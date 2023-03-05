@@ -1,5 +1,10 @@
 package com.dragos.sportsnetworkserver;
 
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.FirestoreClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Comparator;
 
 @SpringBootApplication
@@ -44,7 +51,17 @@ public class SportsNetworkServerApplication {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		FileInputStream serviceAccount =
+				new FileInputStream("./react-chat-app-adminsdk.json");
+
+		FirebaseOptions options = new FirebaseOptions.Builder()
+				.setCredentials(GoogleCredentials.fromStream(serviceAccount))
+				.build();
+
+		FirebaseApp.initializeApp(options);
+		Firestore db = FirestoreClient.getFirestore();
+
 		SpringApplication.run(SportsNetworkServerApplication.class, args);
 	}
 

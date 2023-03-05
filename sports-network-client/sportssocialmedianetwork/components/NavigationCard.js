@@ -41,7 +41,7 @@ export default function NavigationCard() {
           </svg>
           <span className="hidden md:block">Home</span>
         </Link>
-        <Link
+        {/* <Link
           href="/profile/friends"
           className={
             pathname === "/profile/friends"
@@ -64,7 +64,7 @@ export default function NavigationCard() {
             />
           </svg>
           <span className="hidden md:block">Friends</span>
-        </Link>
+        </Link> */}
         <Link
           href="/events"
           className={
@@ -112,9 +112,9 @@ export default function NavigationCard() {
           <span className="hidden md:block">Notifications</span>
         </Link>
         <Link
-          href="/chat"
+          href="/chatApp"
           className={
-            pathname === "/chat"
+            pathname === "/chatApp"
               ? activeElementClasses
               : nonActiveElementClasses
           }

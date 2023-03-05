@@ -3,6 +3,7 @@ package com.dragos.sportsnetworkserver.controllers;
 import com.dragos.sportsnetworkserver.api.UserApi;
 import com.dragos.sportsnetworkserver.model.User;
 import com.dragos.sportsnetworkserver.service.UserService;
+import com.google.firebase.auth.FirebaseAuthException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,7 +23,7 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public ResponseEntity<Void> createUser(User user) {
+    public ResponseEntity<Void> createUser(User user) throws FirebaseAuthException {
         userService.saveUser(user);
         return ResponseEntity.ok().build();
     }
