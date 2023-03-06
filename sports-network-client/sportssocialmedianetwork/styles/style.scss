@@ -36,6 +36,12 @@
       flex: 1;
       background-color: #3e3c61;
       position: relative;
+      @include mobile {
+        width: 10%;
+      }
+      @include tablet {
+        width: 20%;
+      }
 
       .navbar {
         display: flex;
@@ -63,6 +69,9 @@
             width: 24px;
             border-radius: 50%;
             object-fit: cover;
+            @include mobile {
+              display: none;
+            }
           }
 
           button {
@@ -93,6 +102,12 @@
             &::placeholder {
               color: lightgray;
             }
+
+            @include mobile {
+              &::placeholder {
+                font-size: 10px;
+              }
+            }
           }
         }
       }
@@ -114,16 +129,25 @@
           height: 50px;
           border-radius: 50%;
           object-fit: cover;
+          @include mobile {
+            display: none;
+          }
         }
 
         .userChatInfo {
           span {
             font-size: 18px;
             font-weight: 500;
+            @include mobile {
+              font-size: 14px;
+            }
           }
           p {
             font-size: 14px;
             color: lightgray;
+            @include mobile {
+              font-size: 10px;
+            }
           }
         }
       }
@@ -167,6 +191,7 @@
             flex-direction: column;
             color: gray;
             font-weight: 300;
+            align-items: center;
 
             img {
               width: 40px;
@@ -219,12 +244,11 @@
         input {
           width: 100%;
           border: none;
-          outline: none;
           color: #2f2d52;
           font-size: 18px;
 
           &::placeholder {
-            color: lightgray;
+            color: gray;
           }
         }
 

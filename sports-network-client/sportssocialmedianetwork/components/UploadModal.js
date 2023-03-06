@@ -10,9 +10,6 @@ export default function UploadModal({ onPost }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [caption, setCaption] = useState("");
 
-  // const getBase64StringFromDataURL = (dataURL) =>
-  //     dataURL.replace('data:', '').replace(/^.+,/, '');
-
   const dataURLtoFile = (dataurl, filename) => {
     const arr = dataurl.split(",");
     const mime = arr[0].match(/:(.*?);/)[1];

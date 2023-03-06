@@ -2,7 +2,6 @@ import Layout from "../components/Layout";
 import Card from "../components/Card";
 import Avatar from "../components/Avatar";
 import Link from "next/link";
-import PostCard from "../components/PostCard";
 import { useRouter } from "next/router";
 import FriendInfo from "../components/FriendInfo";
 import { useState, useEffect } from "react";
