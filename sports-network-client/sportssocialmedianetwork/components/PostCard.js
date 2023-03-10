@@ -88,11 +88,6 @@ export default function PostCard({
 
   const numDescending = [...comments].sort((a, b) => a.id - b.id);
 
-  const ConsoleLog = ({ children }) => {
-    console.log(children);
-    return false;
-  };
-
   return (
     <Card>
       <div className="flex gap-3">
@@ -331,7 +326,6 @@ export default function PostCard({
                         {comment.userEmail.split("@")[0]}
                       </span>
                     </Link>
-                    <ConsoleLog>{comment.createdAt}</ConsoleLog>
                     <span className="text-sm text-gray-500">
                       {" "}
                       <ReactTimeAgo
