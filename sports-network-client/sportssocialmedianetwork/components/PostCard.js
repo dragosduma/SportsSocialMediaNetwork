@@ -22,6 +22,20 @@ export default function PostCard({
   var splitUsername = "";
   if (username) splitUsername = username.split("@")[0];
 
+  const [decode, setDecode] = useState("");
+  if (user && decode === "")
+    setDecode(jwtDecode(user.jwtToken));
+
+  const [sameUser, setSameUser] = useState(true);
+  if (decode && sameUser)
+    if (decode.sub !== username)
+      setSameUser(false);
+
+  useEffect(() => {
+    fetchComments();
+    fetchLikes();
+  }, []);
+
   function openDropdown(e) {
     e.stopPropagation();
     setDropdownOpen(true);
@@ -32,16 +46,45 @@ export default function PostCard({
     setDropdownOpen(false);
   }
 
-  const [comment, setComment] = useState({
-    text: "",
-    postId: id,
-  });
+  const [like, setLike] = useState({
+    postId: id
+  })
 
-  const [comments, setComments] = useState([]);
+  const [likes, setLikes] = useState([]);
 
-  useEffect(() => {
-    fetchComments();
-  }, []);
+  function fetchLikes() {
+    axios
+      .get(`/likes?postId=${id}`, {
+        headers: authHeader(),
+      })
+      .then((response) => {
+        setLikes(response.data);
+      });
+  }
+
+  const isLikedByMe = !!likes.find(like => like.userEmail === decode.sub)
+  const likeId = likes.find(like => like.userEmail === decode.sub)?.id
+
+  function handleLike() {
+    if (isLikedByMe) {
+      return axios
+        .delete(`/likes/${likeId}`, {
+          headers: authHeader(),
+        })
+        .then(() => {
+          fetchLikes();
+        });
+    }
+
+    return axios
+      .post("/likes", like, {
+        headers: authHeader(),
+      })
+      .then(() => {
+        fetchLikes();
+      });
+  }
+
 
   function fetchComments() {
     axios
@@ -52,6 +95,13 @@ export default function PostCard({
         setComments(response.data);
       });
   }
+
+  const [comment, setComment] = useState({
+    text: "",
+    postId: id,
+  });
+
+  const [comments, setComments] = useState([]);
 
   function updateComment(value) {
     const commentCopy = { ...comment };
@@ -79,12 +129,6 @@ export default function PostCard({
         alert("Post deleted!");
       });
   };
-
-  const [decode, setDecode] = useState("");
-  if (user && decode === "") setDecode(jwtDecode(user.jwtToken));
-
-  const [sameUser, setSameUser] = useState(true);
-  if (decode && sameUser) if (decode.sub !== username) setSameUser(false);
 
   const numDescending = [...comments].sort((a, b) => a.id - b.id);
 
@@ -239,14 +283,14 @@ export default function PostCard({
         </div>
       </div>
       <div className="mt-5 flex gap-8">
-        <button className="flex gap-2 items-center">
+        <button className="flex gap-2 items-center" onClick={() => handleLike()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className={"w-6 h-6 " + (isLikedByMe ? "fill-red-500" : "")}
           >
             <path
               strokeLinecap="round"
@@ -254,7 +298,7 @@ export default function PostCard({
               d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
             />
           </svg>
-          72
+          {likes?.length}
         </button>
         <button className="flex gap-2 items-center">
           <svg
@@ -271,7 +315,7 @@ export default function PostCard({
               d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
             />
           </svg>
-          {comments.length}
+          {comments?.length}
         </button>
         <button className="flex gap-2 items-center">
           <svg

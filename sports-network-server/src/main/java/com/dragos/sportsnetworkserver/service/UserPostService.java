@@ -41,8 +41,8 @@ public class UserPostService {
         return userPostRepository.save(userPostDb);
     }
 
-    public RestUserPost findById(int id) {
-        return null;
+    public UserPostDb findById(int id) {
+        return userPostRepository.findById(id).get();
     }
 
     public void deleteUserPostById(int id) {
@@ -60,7 +60,13 @@ public class UserPostService {
         }
     }
 
-    public static UserPostDb mapToDbUserPost(MultipartFile file, String caption, int id) throws IOException {
+    public int getUserIdFromPostId(int postId) {
+        UserPostDb userPostDb = findById(postId);
+        int userId = userPostDb.getUserId();
+        return userId;
+    }
+
+    private static UserPostDb mapToDbUserPost(MultipartFile file, String caption, int id) throws IOException {
         UserPostDb u = new UserPostDb();
         u.setCaption(caption);
         u.setImage(file.getBytes());
@@ -70,7 +76,7 @@ public class UserPostService {
         return u;
     }
 
-    public RestUserPost mapToRestUserPost(UserPostDb userPostDb) {
+    private RestUserPost mapToRestUserPost(UserPostDb userPostDb) {
         return RestUserPost
                 .builder()
                 .caption(userPostDb.getCaption())

@@ -59,7 +59,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(id).get().mapToRestUser();
     }
 
-    public Optional<UserDb> findByEmail(String email) {
+    private Optional<UserDb> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
@@ -100,7 +100,7 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),new ArrayList<>());
     }
 
-    public static UserDb mapToDbUser(User user) {
+    private static UserDb mapToDbUser(User user) {
         UserDb u = new UserDb();
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
@@ -112,7 +112,7 @@ public class UserService implements UserDetailsService {
         return u;
     }
 
-    public void createFirebaseUser(User user) throws FirebaseAuthException {
+    private void createFirebaseUser(User user) throws FirebaseAuthException {
         UserRecord.CreateRequest request = new UserRecord.CreateRequest()
                 .setEmail(user.getEmail())
                 .setPassword(user.getPassword())
@@ -125,7 +125,7 @@ public class UserService implements UserDetailsService {
         System.out.println("Successfully created new user: " + userRecord.getUid());
     }
 
-    public void updateUserCollection(User user, String uid) {
+    private void updateUserCollection(User user, String uid) {
         Map<String,Object> docData = new HashMap<>();
         docData.put("displayName", user.getFirstName()+" "+user.getLastName());
         docData.put("email", user.getEmail());
@@ -134,7 +134,7 @@ public class UserService implements UserDetailsService {
         ApiFuture<WriteResult> writeResult = db.collection("users").document(uid).set(docData, SetOptions.merge());
     }
 
-    public void createUserChatCollection(String uid) {
+    private void createUserChatCollection(String uid) {
         Map<String, Object> docData = new HashMap<>();
         ApiFuture<WriteResult> writeResult = db.collection("userChats").document(uid).set(docData);
     }

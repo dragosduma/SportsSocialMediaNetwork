@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -50,7 +51,7 @@ public class PostCommentService {
         return postCommentRepository.save(postCommentDb);
     }
 
-    public static PostCommentDb mapToDbPostComment(PostComment postComment, int userId) {
+    private static PostCommentDb mapToDbPostComment(PostComment postComment, int userId) {
         PostCommentDb p = new PostCommentDb();
         p.setPostId(postComment.getPostId());
         p.setText(postComment.getText());
@@ -59,14 +60,14 @@ public class PostCommentService {
         return p;
     }
 
-    public RestPostComment mapToRestPostComment(PostCommentDb postCommentDb) {
+    private RestPostComment mapToRestPostComment(PostCommentDb postCommentDb) {
         return RestPostComment
                 .builder()
                 .id(postCommentDb.getId())
                 .postId(postCommentDb.getPostId())
                 .userEmail(userService.getUsernameFromId(postCommentDb.getPostedBy()))
                 .text(postCommentDb.getText())
-                .createdAt(postCommentDb.getCreatedAt().atOffset(ZoneOffset.UTC))
+                .createdAt(OffsetDateTime.of(postCommentDb.getCreatedAt(),ZoneOffset.of("+2")))
                 .build();
 
     }

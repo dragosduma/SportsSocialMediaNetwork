@@ -415,10 +415,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/RestPostComment'
-          description: Successful response - returns an array of `PostComment` entities.
+          description: Successful response - returns an array of `RestPostComment` entities.
       operationId: getPostComments
       summary: List All PostComments
-      description: Gets a list of all `PostComment` entities.
+      description: Gets a list of all `RestPostComment` entities.
     post:
       tags:
         - PostComment
@@ -479,6 +479,99 @@ paths:
     parameters:
       - name: postcommentId
         description: A unique identifier for a `PostComment`.
+        schema:
+          type: string
+        in: path
+        required: true
+  /likes:
+    summary: Path used to manage the list of likes.
+    description: "The REST endpoint/path used to list and create zero or more `like`\
+      \ entities.  This path contains a `GET` and `POST` operation to perform the\
+      \ list and create tasks, respectively."
+    get:
+      tags:
+        - Like
+      parameters:
+        - name: postId
+          description: ""
+          schema:
+            type: integer
+          in: query
+          required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RestLike'
+          description: Successful response - returns an array of `Like` entities.
+      operationId: getLikes
+      summary: List All likes
+      description: Gets a list of all `Like` entities.
+    post:
+      tags:
+        - Like
+      requestBody:
+        description: A new `Like` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Like'
+        required: true
+      responses:
+        "201":
+          description: Successful response.
+      operationId: createLike
+      summary: Create a Like
+      description: Creates a new instance of a `Like`.
+  /likes/{likeId}:
+    summary: Path used to manage a single Like.
+    description: "The REST endpoint/path used to get, update, and delete single instances\
+      \ of an `Like`.  This path contains `GET`, `PUT`, and `DELETE` operations used\
+      \ to perform the get, update, and delete tasks, respectively."
+    get:
+      tags:
+        - Like
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Like'
+          description: Successful response - returns a single `Like`.
+      operationId: getLike
+      summary: Get a Like
+      description: Gets the details of a single instance of a `Like`.
+    put:
+      tags:
+        - Like
+      requestBody:
+        description: Updated `Like` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Like'
+        required: true
+      responses:
+        "202":
+          description: Successful response.
+      operationId: updateLike
+      summary: Update a Like
+      description: Updates an existing `Like`.
+    delete:
+      tags:
+        - Like
+      responses:
+        "204":
+          description: Successful response.
+      operationId: deleteLike
+      summary: Delete a Like
+      description: Deletes an existing `Like`.
+    parameters:
+      - name: likeId
+        description: A unique identifier for a `Like`.
         schema:
           type: string
         in: path
@@ -654,6 +747,39 @@ components:
           format: date-time
           description: ""
           type: string
+    Like:
+      description: ""
+      required:
+        - likedBy
+        - postId
+      type: object
+      properties:
+        id:
+          description: ""
+          type: integer
+        likedBy:
+          description: ""
+          type: string
+        postId:
+          description: ""
+          type: integer
+    RestLike:
+      description: ""
+      required:
+        - id
+        - postId
+        - userEmail
+      type: object
+      properties:
+        id:
+          description: ""
+          type: integer
+        userEmail:
+          description: ""
+          type: string
+        postId:
+          description: ""
+          type: integer
 tags:
   - name: User
     description: ""
@@ -668,4 +794,8 @@ tags:
   - name: PostComment
     description: ""
   - name: RestPostComment
+    description: ""
+  - name: Like
+    description: ""
+  - name: RestLike
     description: ""

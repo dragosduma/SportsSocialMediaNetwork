@@ -3,8 +3,6 @@ import {
     useContext,
     useReducer,
 } from "react";
-import { auth } from "../firebase";
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { AuthContext } from "./AuthContext";
 
 export const ChatContext = createContext();
