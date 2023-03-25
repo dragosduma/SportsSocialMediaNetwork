@@ -83,7 +83,7 @@ export default function EventModal({ onPost }) {
         e.preventDefault();
 
         return axios
-            .post("/events", data, {
+            .post("http://localhost:8080/events", data, {
                 headers: authHeader()
             })
             .then((response) => {

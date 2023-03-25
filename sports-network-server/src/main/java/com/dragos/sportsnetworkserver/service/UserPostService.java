@@ -28,7 +28,7 @@ public class UserPostService {
     public List<RestUserPost> findAll() {
         List<RestUserPost> allUserPosts = new ArrayList<>();
         Iterable<UserPostDb> userPosts = userPostRepository.findAll();
-        for(UserPostDb userPostDb : userPosts){
+        for(UserPostDb userPostDb : userPosts) {
             allUserPosts.add(mapToRestUserPost(userPostDb));
         }
         return allUserPosts;

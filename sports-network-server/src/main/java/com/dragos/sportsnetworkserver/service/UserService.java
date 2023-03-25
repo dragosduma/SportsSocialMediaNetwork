@@ -20,6 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.*;
 
 @Service
@@ -50,13 +51,14 @@ public class UserService implements UserDetailsService {
         List<User> allUsers = new ArrayList<>();
         Iterable<UserDb> users = userRepository.findAll();
         for(UserDb userDb : users){
-            allUsers.add(userDb.mapToRestUser());
+            allUsers.add(mapToRestUser(userDb));
         }
         return allUsers;
     }
 
     public User findById(int id) {
-        return userRepository.findById(id).get().mapToRestUser();
+        UserDb userDb = userRepository.findById(id).get();
+        return mapToRestUser(userDb);
     }
 
     private Optional<UserDb> findByEmail(String email) {
@@ -93,8 +95,8 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        Optional<UserDb> userDb = userRepository.findByEmail(username);
-        User user = userDb.get().mapToRestUser();
+        UserDb userDb = userRepository.findByEmail(username).get();
+        User user = mapToRestUser(userDb);
         if(userDb == null)
             throw new UsernameNotFoundException(username);
         return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),new ArrayList<>());
@@ -110,6 +112,20 @@ public class UserService implements UserDetailsService {
         u.setRegisteredAt(LocalDateTime.now());
         u.setUserImage(user.getUserImage());
         return u;
+    }
+
+    public User mapToRestUser(UserDb userDb) {
+        return User
+                .builder()
+                .id(userDb.getId())
+                .firstName(userDb.getFirstName())
+                .lastName(userDb.getLastName())
+                .email(userDb.getEmail())
+                .password(userDb.getPasswordHash())
+                .phoneNumber(userDb.getPhoneNumber())
+                .registeredAt(userDb.getRegisteredAt().atOffset(ZoneOffset.UTC))
+                .userImage(userDb.getUserImage())
+                .build();
     }
 
     private void createFirebaseUser(User user) throws FirebaseAuthException {

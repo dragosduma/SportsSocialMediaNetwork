@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -37,12 +37,12 @@ public class EventDb {
     @Column(name="user_id")
     private int creator;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable (
             name="event_has_user",
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<UserDb> participants = new HashSet<>();
+    private List<UserDb> participants = new ArrayList<>();
 
     @Embedded
     @AttributeOverrides({

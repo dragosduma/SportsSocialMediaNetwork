@@ -10,7 +10,6 @@ export default function EventsPage() {
 
     const [currentUser, setCurrentUser] = useState(undefined);
 
-
     useEffect(() => {
         const user = authService.getCurrentUser();
 
@@ -20,6 +19,8 @@ export default function EventsPage() {
         else {
             authService.logout();
         }
+
+        fetchEvents();
     }, []);
 
     const [events, setEvents] = useState([]);
@@ -30,6 +31,7 @@ export default function EventsPage() {
         eventService.getAllEvents().then(
             (response) => {
                 setEvents(response.data);
+                console.log(events)
             },
             (error) => {
                 console.log(error)
@@ -37,19 +39,18 @@ export default function EventsPage() {
         );
     }
 
-
     return (
         <Layout>
             <EventFormCard user={currentUser} />
             {events?.length > 0 &&
                 orderDescending.map((events) => (
                     <EventCard
-                        key={posts.id}
-                        id={posts.id}
+                        key={events.id}
+                        id={events.id}
                         user={currentUser}
                     />
                 ))}
-            <EventCard />
+
             <EventModal onPost={fetchEvents}></EventModal>
         </Layout>
     )

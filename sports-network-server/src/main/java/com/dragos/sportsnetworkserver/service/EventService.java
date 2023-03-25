@@ -1,12 +1,13 @@
 package com.dragos.sportsnetworkserver.service;
 
-import com.dragos.sportsnetworkserver.model.Event;
-import com.dragos.sportsnetworkserver.model.EventDb;
-import com.dragos.sportsnetworkserver.model.Location;
-import com.dragos.sportsnetworkserver.model.SportType;
+import com.dragos.sportsnetworkserver.model.*;
 import com.dragos.sportsnetworkserver.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class EventService {
@@ -17,6 +18,15 @@ public class EventService {
     public EventService(EventRepository eventRepository, UserService userService) {
         this.eventRepository = eventRepository;
         this.userService = userService;
+    }
+
+    public List<RestEvent> findAll() {
+        List<RestEvent> allEvents = new ArrayList<>();
+        Iterable<EventDb> events = eventRepository.findAll();
+        for(EventDb eventDb : events){
+            allEvents.add(mapToRestEvent(eventDb));
+        }
+        return allEvents;
     }
 
     public EventDb saveEvent(Event event) {
@@ -50,5 +60,29 @@ public class EventService {
         SportType sportType = SportType.fromString(event.getSportType());
         e.setSportType(sportType);
         return e;
+    }
+
+    private RestEvent mapToRestEvent(EventDb eventDb) {
+        List<UserDb> dbUsers = eventDb.getParticipants();
+        List<User> users = new ArrayList<>();
+
+        for(UserDb userDb : dbUsers) {
+            User user = userService.mapToRestUser(userDb);
+            users.add(user);
+        }
+
+        return RestEvent
+                .builder()
+                .id(eventDb.getId())
+                .userEmail(userService.getUsernameFromId(eventDb.getCreator()))
+                .eventDateTime(eventDb.getEventDateTime().atOffset(ZoneOffset.UTC))
+                .eventDetails(eventDb.getEventDetails())
+                .eventDuration(eventDb.getEventDuration())
+                .eventName(eventDb.getEventName())
+                .latitude(eventDb.getLocation() != null ? eventDb.getLocation().getLatitude() : null)
+                .longitude(eventDb.getLocation() != null ? eventDb.getLocation().getLongitude() : null)
+                .participants(users)
+                .sportType(eventDb.getSportType().toString())
+                .build();
     }
 }

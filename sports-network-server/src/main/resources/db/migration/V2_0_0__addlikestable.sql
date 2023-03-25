@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS `sportssocialmediadb`.`likes` (
   CONSTRAINT `fk_table1_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `sportssocialmediadb`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_table1_user_post1`
     FOREIGN KEY (`user_post_id`)
     REFERENCES `sportssocialmediadb`.`user_post` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)

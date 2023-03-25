@@ -2,6 +2,7 @@ package com.dragos.sportsnetworkserver.controllers;
 
 import com.dragos.sportsnetworkserver.api.EventApi;
 import com.dragos.sportsnetworkserver.model.Event;
+import com.dragos.sportsnetworkserver.model.RestEvent;
 import com.dragos.sportsnetworkserver.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,13 +35,13 @@ public class EventController implements EventApi {
     }
 
     @Override
-    public ResponseEntity<Event> getEvent(String eventId) {
-        return ResponseEntity.ok(eventService.findById(Integer.parseInt(eventId)));
+    public ResponseEntity<RestEvent> getEvent(String eventId) {
+        return null;
     }
 
     @Override
-    public ResponseEntity<List<Event>> getEvents() {
-        return ResponseEntity.ok(eventService);
+    public ResponseEntity<List<RestEvent>> getEvents() {
+        return ResponseEntity.ok(eventService.findAll());
     }
 
     @Override

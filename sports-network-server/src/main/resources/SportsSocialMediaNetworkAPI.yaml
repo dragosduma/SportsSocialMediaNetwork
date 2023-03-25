@@ -21,13 +21,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Event'
-          description: Successful response - returns a single `Event`.
+                $ref: '#/components/schemas/RestEvent'
+          description: Successful response - returns a single `RestEvent`.
         "404":
           description: Event not found
       operationId: getEvent
       summary: Get a Event
-      description: Gets the details of a single instance of a `Event`.
+      description: Gets the details of a single instance of a `RestEvent`.
     put:
       requestBody:
         description: Updated `Event` information.
@@ -79,13 +79,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Event'
-          description: Successful response - returns an array of `Event` entities.
+                  $ref: '#/components/schemas/RestEvent'
+          description: Successful response - returns an array of `RestEvent` entities.
         "404":
           description: Event not found
       operationId: getEvents
       summary: List All Events
-      description: Gets a list of all `Event` entities.
+      description: Gets a list of all `RestEvent` entities.
     post:
       requestBody:
         description: A new `Event` to be created.
@@ -399,7 +399,7 @@ paths:
         \ list and create tasks, respectively."
     get:
       tags:
-      - RestPostComment
+      - PostComment
       parameters:
       - name: postId
         description: ""
@@ -442,17 +442,17 @@ paths:
       \ used to perform the get, update, and delete tasks, respectively."
     get:
       tags:
-        - RestPostComment
+        - PostComment
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestPostComment'
-          description: Successful response - returns a single `RestPostComment`.
+          description: Successful response - returns a single `PostComment`.
       operationId: getPostComment
       summary: Get a PostComment
-      description: Gets the details of a single instance of a `RestPostComment`.
+      description: Gets the details of a single instance of a `PostComment`.
     put:
       tags:
         - PostComment
@@ -783,6 +783,53 @@ components:
         postId:
           description: ""
           type: integer
+    RestEvent:
+      description: ""
+      required:
+        - id
+        - eventName
+        - eventDateTime
+        - eventDuration
+        - sportType
+        - creator
+        - participants
+      type: object
+      properties:
+        id:
+          description: ""
+          type: integer
+        eventName:
+          description: ""
+          type: string
+        eventDetails:
+          description: ""
+          type: string
+        eventDateTime:
+          format: date-time
+          description: ""
+          type: string
+        eventDuration:
+          description: ""
+          type: integer
+        sportType:
+          description: ""
+          type: string
+        userEmail:
+          description: ""
+          type: string
+        latitude:
+          format: double
+          description: ""
+          type: number
+        longitude:
+          format: double
+          description: ""
+          type: number
+        participants:
+          description: ""
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
 tags:
   - name: User
     description: ""
@@ -801,4 +848,6 @@ tags:
   - name: Like
     description: ""
   - name: RestLike
+    description: ""
+  - name: RestEvent
     description: ""

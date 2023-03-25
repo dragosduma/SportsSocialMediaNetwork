@@ -51,17 +51,5 @@ public class UserDb {
             inverseJoinColumns = @JoinColumn(name = "event_id"))
     private Set<EventDb> events = new HashSet<>();
 
-    public User mapToRestUser() {
-        return User
-                .builder()
-                .id(this.getId())
-                .firstName(this.getFirstName())
-                .lastName(this.getLastName())
-                .email(this.getEmail())
-                .password(this.getPasswordHash())
-                .phoneNumber(this.getPhoneNumber())
-                .registeredAt(this.getRegisteredAt().atOffset(ZoneOffset.UTC))
-                .userImage(this.getUserImage())
-                .build();
-    }
+
 }
