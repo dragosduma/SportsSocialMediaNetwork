@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class EventController implements EventApi {
+
     @Autowired
     private EventService eventService;
 
@@ -39,7 +40,7 @@ public class EventController implements EventApi {
 
     @Override
     public ResponseEntity<List<Event>> getEvents() {
-        return null;
+        return ResponseEntity.ok(eventService);
     }
 
     @Override

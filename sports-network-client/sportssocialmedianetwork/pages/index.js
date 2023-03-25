@@ -19,13 +19,11 @@ export default function Home() {
     else {
       authService.logout();
     }
+
+    fetchPosts();
   }, []);
 
   const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
 
   const orderDescending = [...posts].sort((a, b) => b.id - a.id);
 

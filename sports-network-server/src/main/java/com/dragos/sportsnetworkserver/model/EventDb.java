@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -20,35 +18,36 @@ public class EventDb {
     @Id
     private int id;
 
-    private String sport;
+    @Column(name="event_name")
+    private String eventName;
 
-    @Column(name = "event_time")
-    private LocalDateTime eventTime;
+    @Column(name="event_details")
+    private String eventDetails;
 
-    private String description;
+    @Column(name = "event_datetime")
+    private LocalDateTime eventDateTime;
 
     @Column(name = "event_duration")
-    private LocalDateTime eventDuration;
+    private int eventDuration;
 
-    public static EventDb mapToDbEvent(Event event) {
-        EventDb e = new EventDb();
-        e.id = event.getId();
-        e.sport = event.getSport();
-        e.description = event.getDescription();
-        e.eventDuration = event.getEventDuration().toLocalDateTime();
-        e.eventTime = event.getEventTime().toLocalDateTime();
-        return e;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sport_type")
+    private SportType sportType;
 
-    public Event mapToRestEvent() {
-        return Event
-                .builder()
-                .id(this.id)
-                .sport(this.sport)
-                .description(this.description)
-                .eventDuration(this.getEventDuration().atOffset(ZoneOffset.UTC))
-                .eventTime(this.getEventTime().atOffset(ZoneOffset.UTC))
-                .build();
-    }
+    @Column(name="user_id")
+    private int creator;
 
+    @ManyToMany
+    @JoinTable (
+            name="event_has_user",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<UserDb> participants = new HashSet<>();
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "latitude", column=@Column(name = "latitude")),
+            @AttributeOverride(name = "longitude", column=@Column(name= "longitude"))
+    })
+    private Location location;
 }

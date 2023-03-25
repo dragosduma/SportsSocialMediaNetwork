@@ -399,7 +399,7 @@ paths:
         \ list and create tasks, respectively."
     get:
       tags:
-      - PostComment
+      - RestPostComment
       parameters:
       - name: postId
         description: ""
@@ -442,17 +442,17 @@ paths:
       \ used to perform the get, update, and delete tasks, respectively."
     get:
       tags:
-        - PostComment
+        - RestPostComment
       responses:
         "200":
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestPostComment'
-          description: Successful response - returns a single `PostComment`.
+          description: Successful response - returns a single `RestPostComment`.
       operationId: getPostComment
       summary: Get a PostComment
-      description: Gets the details of a single instance of a `PostComment`.
+      description: Gets the details of a single instance of a `RestPostComment`.
     put:
       tags:
         - PostComment
@@ -582,27 +582,30 @@ components:
       title: Root Type for Event
       description: ""
       required:
-        - id
+        - name
+        - sportType
+        - eventDateTime
       type: object
       properties:
-        id:
+        name:
+          type: string
+        sportType:
+          type: string
+        latitude:
+          format: double
+          description: ""
+          type: number
+        longitude:
+          format: double
+          description: ""
+          type: number
+        duration:
           type: integer
-        sport:
-          type: string
-        eventTime:
+        eventDateTime:
           format: date-time
           type: string
-        description:
+        details:
           type: string
-        eventDuration:
-          format: date-time
-          type: string
-      example:
-        id: 1
-        sport: football
-        eventTime: 2020-07-21T12:12:23.000+0200
-        description: this is a description
-        eventDuration: 2020-07-21T12:12:23.000+0200
     User:
       title: Root Type for User
       description: ""

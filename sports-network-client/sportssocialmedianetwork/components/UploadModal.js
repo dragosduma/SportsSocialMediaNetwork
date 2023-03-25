@@ -1,12 +1,12 @@
 import { useRecoilState } from "recoil";
-import { modalState } from "../atom/modalAtom";
+import { uploadModalState } from "../atom/uploadModalAtom";
 import Modal from "react-modal";
 import { CameraIcon } from "@heroicons/react/outline";
 import { useRef, useState } from "react";
 import axios from "axios";
 
 export default function UploadModal({ onPost }) {
-  const [open, setOpen] = useRecoilState(modalState);
+  const [open, setOpen] = useRecoilState(uploadModalState);
   const [selectedFile, setSelectedFile] = useState(null);
   const [caption, setCaption] = useState("");
 

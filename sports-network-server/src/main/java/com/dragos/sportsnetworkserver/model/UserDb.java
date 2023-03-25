@@ -4,12 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -44,6 +43,13 @@ public class UserDb {
 
     @Column(name = "user_image")
     private String userImage;
+
+    @ManyToMany
+    @JoinTable(
+            name= "event_has_user",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private Set<EventDb> events = new HashSet<>();
 
     public User mapToRestUser() {
         return User

@@ -60,11 +60,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sportssocialmediadb`.`event` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `sport` VARCHAR(45) NOT NULL,
-  `event_time` DATETIME NULL,
-  `description` VARCHAR(45) NULL,
-  `event_duration` VARCHAR(45) NULL,
+  `event_name` VARCHAR(45) NULL,
+  `event_details` VARCHAR(45) NULL,
+  `event_datetime` DATETIME NULL,
+  `event_duration` INT NULL,
+  `sport_type` VARCHAR(45) NOT NULL,
   `user_id` INT NOT NULL,
+  `latitude` DOUBLE NULL,
+  `longitude` DOUBLE NULL,
   PRIMARY KEY (`id`, `user_id`),
   INDEX `fk_event_user1_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `fk_event_user1`
