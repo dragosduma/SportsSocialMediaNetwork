@@ -88,7 +88,9 @@ export default function EventModal({ onPost }) {
             })
             .then((response) => {
                 setOpen(false);
-                console.log(response.data);
+                if (onPost) {
+                    onPost();
+                }
             })
     }
 

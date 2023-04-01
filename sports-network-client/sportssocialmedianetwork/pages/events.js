@@ -24,6 +24,7 @@ export default function EventsPage() {
     }, []);
 
     const [events, setEvents] = useState([]);
+    const [filteredEvents, setFilteredEvents] = useState([]);
 
     const orderDescending = [...events].sort((a, b) => b.id - a.id);
 
@@ -31,7 +32,6 @@ export default function EventsPage() {
         eventService.getAllEvents().then(
             (response) => {
                 setEvents(response.data);
-                console.log(events)
             },
             (error) => {
                 console.log(error)
@@ -39,17 +39,71 @@ export default function EventsPage() {
         );
     }
 
+    function handleSearch(searchTerm) {
+        const filtered = events.filter((event) => {
+            return (
+                event.eventName.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+        });
+
+        setFilteredEvents(filtered);
+    }
+
+    function clearSearch() {
+        setFilteredEvents([]);
+    }
+
     return (
         <Layout>
-            <EventFormCard user={currentUser} />
-            {events?.length > 0 &&
-                orderDescending.map((events) => (
+            <EventFormCard user={currentUser} events={events} onSearch={handleSearch} />
+            {filteredEvents.length > 0 ? (
+                filteredEvents.map((event) => (
                     <EventCard
-                        key={events.id}
-                        id={events.id}
+                        key={event.id}
+                        id={event.id}
+                        eventName={event.eventName}
+                        eventDetails={event.eventDetails}
+                        eventDuration={event.eventDuration}
+                        eventDateTime={event.eventDateTime}
+                        latitude={event.latitude}
+                        longitude={event.longitude}
+                        participants={event.participants}
+                        sportType={event.sportType}
+                        username={event.userEmail}
                         user={currentUser}
                     />
-                ))}
+                ))
+            ) : (
+                <>
+                    {events.length > 0 ? (
+                        events.map((event) => (
+                            <EventCard
+                                key={event.id}
+                                id={event.id}
+                                eventName={event.eventName}
+                                eventDetails={event.eventDetails}
+                                eventDuration={event.eventDuration}
+                                eventDateTime={event.eventDateTime}
+                                latitude={event.latitude}
+                                longitude={event.longitude}
+                                participants={event.participants}
+                                sportType={event.sportType}
+                                username={event.userEmail}
+                                user={currentUser}
+                            />
+                        ))
+                    ) : (
+                        <div>No events found</div>
+                    )}
+                </>
+            )}
+            {filteredEvents.length > 0 && (
+                <div className="mt-4">
+                    <button onClick={clearSearch} className="bg-gray-200 rounded-md px-4 py-2">
+                        Clear Search
+                    </button>
+                </div>
+            )}
 
             <EventModal onPost={fetchEvents}></EventModal>
         </Layout>
