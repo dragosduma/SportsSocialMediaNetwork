@@ -36,8 +36,9 @@ public class EventService {
         return eventRepository.save(eventDb);
     }
 
-    public Event findById(int id) {
-        return null;
+    public RestEvent findById(int id) {
+        EventDb eventDb = eventRepository.findById(id).get();
+        return mapToRestEvent(eventDb);
     }
 
     public EventDb updateEvent(Event event, int id) {
@@ -46,6 +47,26 @@ public class EventService {
 
     public void deleteEventById(int id) {
 
+    }
+
+    public void addParticipantToEvent(String eventId) {
+        String username = userService.getUsernameFromUserDetails();
+        UserDb userDb = userService.getUserFromUsername(username);
+
+        EventDb eventDb = eventRepository.findById(Integer.parseInt(eventId)).orElse(null);
+        if (eventDb != null) {
+            List<UserDb> participants = eventDb.getParticipants();
+            if (!participants.contains(userDb)) {
+                participants.add(userDb);
+                eventDb.setParticipants(participants);
+                eventRepository.save(eventDb);
+            }
+        }
+    }
+
+    public List<User> getParticipantsForEvent(String eventId) {
+        RestEvent restEvent = findById(Integer.parseInt(eventId));
+        return restEvent.getParticipants();
     }
 
     private static EventDb mapToDbEvent(Event event, int userId) {

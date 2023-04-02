@@ -93,9 +93,14 @@ public class UserService implements UserDetailsService {
         return userDb.getEmail();
     }
 
+    public UserDb getUserFromUsername(String username) {
+        UserDb userDb = userRepository.findByEmail(username).get();
+        return userDb;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) {
-        UserDb userDb = userRepository.findByEmail(username).get();
+        UserDb userDb = getUserFromUsername(username);
         User user = mapToRestUser(userDb);
         if(userDb == null)
             throw new UsernameNotFoundException(username);

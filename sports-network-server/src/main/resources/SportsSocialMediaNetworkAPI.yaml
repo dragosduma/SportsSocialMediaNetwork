@@ -576,6 +576,44 @@ paths:
           type: string
         in: path
         required: true
+  /events/{eventId}/join:
+    summary: Path used to add an user to event.
+    get:
+      tags:
+        - Event
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+          description: Gets the number of participants for each event.
+      summary: Get participants list.
+    post:
+      tags:
+        - Event
+      parameters:
+        - name: eventId
+          description: "A unique identifier for a Event.\r\n"
+          schema:
+            type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Added user to event.
+        "404":
+          description: No event with that id found
+      summary: add user to event
+    parameters:
+      - name: eventId
+        description: "A unique identifier for a Event.\r\n"
+        schema:
+          type: string
+        in: path
+        required: true
 components:
   schemas:
     Event:

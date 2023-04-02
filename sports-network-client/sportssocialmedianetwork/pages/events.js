@@ -60,7 +60,7 @@ export default function EventsPage() {
                 filteredEvents.map((event) => (
                     <EventCard
                         key={event.id}
-                        id={event.id}
+                        eventId={event.id}
                         eventName={event.eventName}
                         eventDetails={event.eventDetails}
                         eventDuration={event.eventDuration}
@@ -79,7 +79,7 @@ export default function EventsPage() {
                         events.map((event) => (
                             <EventCard
                                 key={event.id}
-                                id={event.id}
+                                eventId={event.id}
                                 eventName={event.eventName}
                                 eventDetails={event.eventDetails}
                                 eventDuration={event.eventDuration}

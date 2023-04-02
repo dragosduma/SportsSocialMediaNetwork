@@ -3,6 +3,7 @@ package com.dragos.sportsnetworkserver.controllers;
 import com.dragos.sportsnetworkserver.api.EventApi;
 import com.dragos.sportsnetworkserver.model.Event;
 import com.dragos.sportsnetworkserver.model.RestEvent;
+import com.dragos.sportsnetworkserver.model.User;
 import com.dragos.sportsnetworkserver.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,9 +35,23 @@ public class EventController implements EventApi {
         return ResponseEntity.ok().build();
     }
 
+    //gets the list of participants for that event
+    @Override
+    public ResponseEntity<List<User>> eventsEventIdJoinGet(String eventId) {
+        return ResponseEntity.ok(eventService.getParticipantsForEvent(eventId));
+    }
+
+    //adds the logged-in user to the list of participants
+    @Override
+    public ResponseEntity<Void> eventsEventIdJoinPost(String eventId) {
+        eventService.addParticipantToEvent(eventId);
+        return ResponseEntity.ok().build();
+    }
+
     @Override
     public ResponseEntity<RestEvent> getEvent(String eventId) {
-        return null;
+        RestEvent restEvent = eventService.findById(Integer.parseInt(eventId));
+        return ResponseEntity.ok(restEvent);
     }
 
     @Override
