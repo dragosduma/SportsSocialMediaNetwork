@@ -5,7 +5,7 @@ import jwtDecode from "jwt-decode";
 import { useRecoilState } from "recoil";
 import { eventModalState } from "../atom/eventModalAtom";
 
-export default function EventFormCard({ user, events, onSearch }) {
+export default function EventFormCard({ user, onSearch }) {
     const [open, setOpen] = useRecoilState(eventModalState);
     const [decode, setDecode] = useState("");
     if (user && decode === "") setDecode(jwtDecode(user.jwtToken));

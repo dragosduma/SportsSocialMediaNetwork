@@ -107,7 +107,7 @@ export default function Login() {
                         </form>
 
                         <div className="flex flex-col items-center">
-                            {error && <p className="text-red-600">Email already exists!</p>}
+                            {error && <p className="text-red-600">Something went wrong!</p>}
                             <p>Fields marked with * are required</p>
                             <p className='italic'>
                                 Login

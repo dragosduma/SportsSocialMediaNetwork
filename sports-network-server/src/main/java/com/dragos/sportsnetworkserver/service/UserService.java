@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import com.google.firebase.cloud.FirestoreClient;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -107,12 +108,22 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword(),new ArrayList<>());
     }
 
+    public boolean authenticate(String username, String password) {
+        UserDb userDb = getUserFromUsername(username);
+
+        if(userDb == null) {
+            return false;
+        }
+
+        return BCrypt.checkpw(password, userDb.getPasswordHash());
+    }
+
     private static UserDb mapToDbUser(User user) {
         UserDb u = new UserDb();
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
         u.setEmail(user.getEmail());
-        u.setPasswordHash(user.getPassword());
+        u.setPasswordHash(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         u.setPhoneNumber(user.getPhoneNumber());
         u.setRegisteredAt(LocalDateTime.now());
         u.setUserImage(user.getUserImage());
