@@ -37,7 +37,7 @@ export default function ProfilePage() {
         <div className="relative overflow-hidden rounded-md">
           <div className="h-36 overflow-hidden flex justify-center items-center">
             <img
-              src="https://images.unsplash.com/photo-1498503182468-3b51cbb6cb24?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+              src="https://images.unsplash.com/photo-1616514169928-a1e40c6f791c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjR8fGZvb3RiYWxsfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
               alt=""
             />
           </div>
@@ -190,25 +190,25 @@ export default function ProfilePage() {
             <div className="grid md:grid-cols-2 gap-4">
               <div className="rounded-md overflow-hidden h-48 flex items-center shadow-md">
                 <img
-                  src="https://images.unsplash.com/photo-1601581875039-e899893d520c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
+                  src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3BvcnRzfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
                   alt=""
                 />
               </div>
               <div className="rounded-md overflow-hidden h-48 flex items-center shadow-md">
                 <img
-                  src="https://images.unsplash.com/photo-1563789031959-4c02bcb41319?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
+                  src="https://images.unsplash.com/photo-1530549387789-4c1017266635?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fHNwb3J0c3xlbnwwfDB8MHx8&auto=format&fit=crop&w=500&q=60"
                   alt=""
                 />
               </div>
               <div className="rounded-md overflow-hidden h-48 flex items-center shadow-md">
                 <img
-                  src="https://images.unsplash.com/photo-1560703650-ef3e0f254ae0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                  src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHNwb3J0c3xlbnwwfDB8MHx8&auto=format&fit=crop&w=500&q=60"
                   alt=""
                 />
               </div>
               <div className="rounded-md overflow-hidden h-48 flex items-center shadow-md">
                 <img
-                  src="https://images.unsplash.com/photo-1601581874834-3b6065645e07?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80"
+                  src="https://plus.unsplash.com/premium_photo-1671436824833-91c0741e89c9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fHNwb3J0c3xlbnwwfDB8MHx8&auto=format&fit=crop&w=500&q=60"
                   alt=""
                 />
               </div>

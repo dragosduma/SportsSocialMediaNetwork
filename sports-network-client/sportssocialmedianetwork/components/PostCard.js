@@ -7,7 +7,6 @@ import ReactTimeAgo from "react-time-ago";
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import authHeader from "../services/auth-header";
-import jwtDecode from "jwt-decode";
 
 export default function PostCard({
   id,
@@ -15,20 +14,17 @@ export default function PostCard({
   img,
   caption,
   createdAt,
-  user,
+  currentUser,
+  socket
 }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   var splitUsername = "";
   if (username) splitUsername = username.split("@")[0];
 
-  const [decode, setDecode] = useState("");
-  if (user && decode === "")
-    setDecode(jwtDecode(user.jwtToken));
-
   const [sameUser, setSameUser] = useState(true);
-  if (decode && sameUser)
-    if (decode.sub !== username)
+  if (currentUser && sameUser)
+    if (currentUser.sub !== username)
       setSameUser(false);
 
   useEffect(() => {
@@ -62,8 +58,8 @@ export default function PostCard({
       });
   }
 
-  const isLikedByMe = !!likes.find(like => like.userEmail === decode.sub)
-  const likeId = likes.find(like => like.userEmail === decode.sub)?.id
+  const isLikedByMe = !!likes.find(like => like.userEmail === currentUser.sub)
+  const likeId = likes.find(like => like.userEmail === currentUser.sub)?.id
 
   function handleLike() {
     if (isLikedByMe) {
@@ -81,10 +77,14 @@ export default function PostCard({
         headers: authHeader(),
       })
       .then(() => {
+        socket.emit("sendNotification", {
+          senderName: currentUser,
+          receiverName: username,
+          type: "like"
+        })
         fetchLikes();
       });
   }
-
 
   function fetchComments() {
     axios
@@ -115,6 +115,11 @@ export default function PostCard({
         headers: authHeader(),
       })
       .then((response) => {
+        socket.emit("sendNotification", {
+          senderName: currentUser,
+          receiverName: username,
+          type: "comment"
+        })
         fetchComments();
       });
   }

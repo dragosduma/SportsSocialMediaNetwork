@@ -5,23 +5,35 @@ import { useState, useEffect } from "react";
 import authService from "../services/auth-service";
 import postService from "../services/post-service";
 import UploadModal from "../components/UploadModal";
+import jwtDecode from "jwt-decode";
+import { io } from "socket.io-client";
 
 export default function Home() {
 
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [socket, setSocket] = useState(null);
 
   useEffect(() => {
     const user = authService.getCurrentUser();
 
     if (user) {
-      setCurrentUser(user);
+      setCurrentUser(jwtDecode(user.jwtToken));
     }
     else {
       authService.logout();
     }
 
+    const socketOptions = {
+      reconnection: false // disable automatic reconnection
+    };
+    
+    setSocket(io("http://localhost:5000", socketOptions));
     fetchPosts();
   }, []);
+
+  useEffect(() => {
+    socket?.emit("newUser", currentUser);
+  }, [socket, currentUser]);
 
   const [posts, setPosts] = useState([]);
 
@@ -39,8 +51,8 @@ export default function Home() {
   }
 
   return (
-    <Layout>
-      <PostFormCard user={currentUser} />
+    <Layout socket={socket}>
+      <PostFormCard currentUser={currentUser} />
       {posts?.length > 0 &&
         orderDescending.map((posts) => (
           <PostCard
@@ -50,7 +62,8 @@ export default function Home() {
             img={posts.image}
             caption={posts.caption}
             createdAt={posts.createdAt}
-            user={currentUser}
+            currentUser={currentUser}
+            socket={socket}
           />
         ))}
 

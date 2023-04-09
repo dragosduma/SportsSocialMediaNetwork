@@ -2,8 +2,9 @@ import Card from "./Card";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import authService from "../services/auth-service";
+import { useState, useEffect } from "react";
 
-export default function NavigationCard() {
+export default function NavigationCard({ socket }) {
   const router = useRouter();
   const { asPath: pathname } = router;
   const activeElementClasses =
@@ -14,6 +15,35 @@ export default function NavigationCard() {
   const logOut = () => {
     authService.logout();
   };
+
+  const [notifications, setNotifications] = useState([]);
+  const [openNotifications, setOpenNotifications] = useState(false);
+
+  useEffect(() => {
+    socket?.on("getNotification", (data) => {
+      setNotifications((prev) => [...prev, data]);
+      console.log(notifications)
+    });
+  }, [socket]);
+
+  const displayNotification = ({ senderName, type }) => {
+
+    let action;
+    switch (type) {
+      case "like":
+        action = "liked your post."
+        break;
+      case "comment":
+        action = "commented your post."
+        break;
+      case "join":
+        action = "joined your event."
+        break;
+    }
+    return (
+      <span key={senderName} className="notification">{`${senderName} ${action}`}</span>
+    )
+  }
 
   return (
     <Card noPadding={true}>
@@ -41,7 +71,7 @@ export default function NavigationCard() {
           </svg>
           <span className="hidden md:block">Home</span>
         </Link>
-        {/* <Link
+        <Link
           href="/profile/friends"
           className={
             pathname === "/profile/friends"
@@ -64,7 +94,7 @@ export default function NavigationCard() {
             />
           </svg>
           <span className="hidden md:block">Friends</span>
-        </Link> */}
+        </Link>
         <Link
           href="/events"
           className={
@@ -87,13 +117,13 @@ export default function NavigationCard() {
 
           <span className="hidden md:block">Events</span>
         </Link>
-        <Link
-          href="/notifications"
+        <div
           className={
             pathname === "/notifications"
               ? activeElementClasses
               : nonActiveElementClasses
           }
+          onClick={() => setOpenNotifications(!openNotifications)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +140,14 @@ export default function NavigationCard() {
             />
           </svg>
           <span className="hidden md:block">Notifications</span>
-        </Link>
+        </div>
+        <div>
+          {openNotifications && (
+            <div>
+              {notifications.map((n, index) => displayNotification(n, index))}
+            </div>
+          )}
+        </div>
         <Link
           href="/chatApp"
           className={

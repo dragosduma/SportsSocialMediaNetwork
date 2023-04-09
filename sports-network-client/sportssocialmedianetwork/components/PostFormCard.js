@@ -1,14 +1,10 @@
 import Card from "./Card";
 import Avatar from "./Avatar";
-import { useState } from "react";
-import jwtDecode from "jwt-decode";
 import { useRecoilState } from "recoil";
 import { uploadModalState } from "../atom/uploadModalAtom";
 
-export default function PostFormCard({ user, onPost }) {
+export default function PostFormCard({ currentUser }) {
   const [open, setOpen] = useRecoilState(uploadModalState);
-  const [decode, setDecode] = useState("");
-  if (user && decode === "") setDecode(jwtDecode(user.jwtToken));
 
   return (
     <Card>
@@ -16,11 +12,11 @@ export default function PostFormCard({ user, onPost }) {
         <div>
           <Avatar />
         </div>
-        {decode && (
+        {currentUser && (
           <input
             disabled
             className="grow p-3 h-14"
-            placeholder={`What's on your mind, ${decode.sub.split("@")[0]}?`}
+            placeholder={`What's on your mind, ${currentUser.sub.split("@")[0]}?`}
           />
         )}
       </div>
